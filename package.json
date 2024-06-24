@@ -1,6 +1,6 @@
 {
   "name": "@haigis/component-library",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "React component library.",
   "scripts": {
     "rollup": "rollup -c"
@@ -22,6 +22,40 @@
   "module": "dist/esm/index.js",
   "files": [
     "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/haigis"
+  }
+}
+{
+  "name": "@haigis/component-library",
+  "version": "0.0.1",
+  "description": "React component library.",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && rollup -c"
+  },
+  "author": "Mark H",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.3.3",
+    "react": "^18.3.1",
+    "rollup": "^4.18.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.2",
+    "rimraf": "^4.0.6"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist",
+    "src"  // Include source files
   ],
   "types": "dist/index.d.ts",
   "type": "module",

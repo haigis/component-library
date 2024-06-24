@@ -5,7 +5,8 @@
     "moduleResolution": "node",
     "declaration": true,
     "declarationDir": "types",
-    "sourceMap": true,
+    "sourceMap": true,  // Enable source maps
+    "inlineSources": true,  // Embed source files in the source maps
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
@@ -13,7 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "jsx": "react"  // Add this line to enable JSX support
+    "jsx": "react"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
