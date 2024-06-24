@@ -1,2 +1,2 @@
 To create the dist folder run :
-npm rollup
+npm run rollup
