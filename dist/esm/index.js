@@ -2831,7 +2831,7 @@ var css_248z = "button {\r\n    font-size: 24px;\r\n    background-color: transp
 styleInject(css_248z);
 
 const Button = (props) => {
-    return React.createElement("a", { href: "{props.href}", "aria-label": "{props.ariaLabel}" },
+    return React.createElement("a", { href: props.href, "aria-label": props.ariaLabel },
         React.createElement("button", null, props.text));
 };
 
