@@ -2802,6 +2802,36 @@ if (process.env.NODE_ENV === 'production') {
 var reactExports = react.exports;
 var React = /*@__PURE__*/getDefaultExportFromCjs(reactExports);
 
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css_248z = "button {\r\n    font-size: 24px;\r\n    background-color: transparent; /* Ensure background is transparent or set a specific color */\r\n    border-radius: 5px; /* Adjust the radius for more pronounced rounded corners */\r\n    border: 2px solid; /* Add your preferred border color or keep it default */\r\n    outline: none; /* Remove the outline to avoid a border when the button is focused */\r\n}\r\n";
+styleInject(css_248z);
+
 const Button = (props) => {
     return React.createElement("button", null, props.label);
 };

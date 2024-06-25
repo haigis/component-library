@@ -5,6 +5,7 @@ import dts from "rollup-plugin-dts";
 import postcss from "rollup-plugin-postcss";
 import { readFileSync } from 'fs';
 
+
 const packageJson = JSON.parse(readFileSync(new URL('./package.json', import.meta.url)));
 
 export default [
@@ -25,12 +26,14 @@ export default [
         plugins: [
             resolve(),
             commonjs(),
-            typescript({ tsconfig: "./tsconfig.json" }), 
+            typescript({ tsconfig: "./tsconfig.json" }),
+            postcss()       
         ],
     },
     {
         input: "dist/esm/types/index.d.ts",
         output: [{ file: "dist/index.d.ts", format: "esm" }],
         plugins: [dts()],
+        external: [/\.css$/],
     }
 ];
