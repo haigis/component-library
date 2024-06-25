@@ -2,11 +2,13 @@ import React from "react";
 import './Button.css';
 
 interface ButtonProps {
-    label: string;
+    ariaLabel: string;
+    text: string;
+    href: string;
 }
 
 const Button = (props: ButtonProps) => {
-    return <button>{props.label}</button>;
+    return <a href="{props.href}" aria-label="{props.ariaLabel}"><button>{props.text}</button></a>;
 };
 
 export default Button;
