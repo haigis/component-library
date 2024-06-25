@@ -8,7 +8,7 @@ interface ButtonProps {
 }
 
 const Button = (props: ButtonProps) => {
-    return <a href="{props.href}" aria-label="{props.ariaLabel}"><button>{props.text}</button></a>;
+    return <a href={props.href} aria-label={props.ariaLabel}><button>{props.text}</button></a>;
 };
 
 export default Button;
