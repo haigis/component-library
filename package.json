@@ -29,5 +29,8 @@
   "type": "module",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/haigis"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.0"
   }
 }
