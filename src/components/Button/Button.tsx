@@ -3,12 +3,12 @@ import { cva } from 'class-variance-authority';
 import React from 'react';
 
 const buttonVariants = cva(
-  'py-2 px-4 rounded-md font-semibold hover:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        primary: 'bg-gradient-to-r from-blue-500 to-green-500 text-black',
-        secondary: 'bg-gray-700 text-white',
+        primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        secondary: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
       },
     },
     defaultVariants: {
