@@ -1,7 +1,0 @@
-button {
-    font-size: 24px;
-    background-color: transparent; /* Ensure background is transparent or set a specific color */
-    border-radius: 5px; /* Adjust the radius for more pronounced rounded corners */
-    border: 2px solid; /* Add your preferred border color or keep it default */
-    outline: none; /* Remove the outline to avoid a border when the button is focused */
-}

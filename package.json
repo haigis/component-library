@@ -31,6 +31,12 @@
     "registry": "https://npm.pkg.github.com/haigis"
   },
   "dependencies": {
-    "class-variance-authority": "^0.7.0"
+    "@radix-ui/react-accordion": "^1.2.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.400.0",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
   }
 }
