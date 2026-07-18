@@ -1,26 +1,44 @@
-export { Button, buttonVariants } from "./components/Button"
+export { Button, buttonVariants, type ButtonProps } from "./components/Button"
 export {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardAction,
-  CardContent,
-  CardFooter,
-  cardClass,
-  cardVariants,
+    Card,
+    CardHeader,
+    CardTitle,
+    CardDescription,
+    CardAction,
+    CardContent,
+    CardFooter,
+    cardClass,
+    cardVariants,
+    type CardProps,
 } from "./components/card"
 export {
-  PageLane,
-  SectionIntro,
-  shellClass,
-  gridClass,
-  laneClass,
+    PageLane,
+    Section,
+    SectionIntro,
+    CardGrid,
+    shellClass,
+    gridClass,
+    laneClass,
+    type LaneWidth,
+    type SectionProps,
+    type CardGridProps,
 } from "./components/layout"
+export { Hero, type HeroProps, type HeroAction } from "./components/Hero"
+export { SiteHeader, type SiteHeaderProps } from "./components/SiteHeader"
+export { SiteFooter, type SiteFooterProps } from "./components/SiteFooter"
 export {
-  SplitFeatureCard,
-  type SplitFeatureCardItem,
-  type SplitFeatureCardProps,
+    SplitFeatureCard,
+    type SplitFeatureCardItem,
+    type SplitFeatureCardProps,
 } from "./components/SplitFeatureCard"
 export { ImageCard, type ImageCardProps } from "./components/ImageCard"
 export { cn } from "./lib/utils"
+export type { NavItem } from "./lib/nav"
+export {
+    iconRegistry,
+    iconNames,
+    resolveIcon,
+    type IconName,
+    type IconProp,
+    type IconComponent,
+} from "./lib/icons"

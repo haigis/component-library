@@ -1,6 +1,6 @@
 {
   "name": "@haigis/component-library",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "React component library built with Tailwind CSS, cva, and Radix primitives.",
   "author": "Mark Haig",
   "license": "ISC",
@@ -16,17 +16,19 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    }
+    },
+    "./theme.css": "./theme.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "theme.css"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/haigis"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
-    "dev": "tsup src/index.ts --watch --format esm,cjs --dts",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "prepare": "npm run build"
   },
   "dependencies": {

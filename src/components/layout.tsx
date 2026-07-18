@@ -1,5 +1,7 @@
 import type { ReactNode } from "react"
 
+import { cn } from "../lib/utils"
+
 export type LaneWidth = 8 | 10 | 12
 
 export const shellClass = "mx-auto w-full max-w-[1600px] px-6 xl:px-8"
@@ -40,10 +42,54 @@ export function SectionIntro({
 }) {
     return (
         <div className="space-y-2">
-            <h2 id={id}>{title}</h2>
+            <h2
+                id={id}
+                className="scroll-m-20 text-3xl font-semibold tracking-tight text-foreground"
+            >
+                {title}
+            </h2>
             {description ? (
-                <p className="max-w-3xl text-muted-foreground">{description}</p>
+                <p className="max-w-3xl leading-7 text-muted-foreground">{description}</p>
             ) : null}
+        </div>
+    )
+}
+
+export type SectionProps = {
+    title?: string
+    description?: string
+    id?: string
+    children: ReactNode
+    className?: string
+}
+
+/** A page section: optional SectionIntro heading followed by content. */
+export function Section({ title, description, id, children, className }: SectionProps) {
+    return (
+        <section className={cn("space-y-6", className)} aria-labelledby={id}>
+            {title ? <SectionIntro id={id} title={title} description={description} /> : null}
+            {children}
+        </section>
+    )
+}
+
+export type CardGridProps = {
+    columns?: 2 | 3
+    children: ReactNode
+    className?: string
+}
+
+/** Responsive grid for cards: 1 column on mobile, up to `columns` on wide screens. */
+export function CardGrid({ columns = 3, children, className }: CardGridProps) {
+    return (
+        <div
+            className={cn(
+                "grid gap-5",
+                columns === 2 ? "md:grid-cols-2" : "md:grid-cols-2 xl:grid-cols-3",
+                className
+            )}
+        >
+            {children}
         </div>
     )
 }

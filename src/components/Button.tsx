@@ -31,6 +31,8 @@ export const buttonVariants = cva(
                     "bg-destructive text-destructive-foreground shadow-sm hover:opacity-90",
                 link:
                     "text-primary underline-offset-4 hover:underline",
+                heroPrimary: "site-hero-button-primary",
+                heroSecondary: "site-hero-button-secondary",
             },
             size: {
                 default: "h-9 px-4 py-2",

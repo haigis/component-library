@@ -1,0 +1,415 @@
+/*
+ * @haigis/component-library — design tokens and component styles.
+ *
+ * Usage (Tailwind CSS v4), in your app's CSS entry:
+ *
+ *   @import "tailwindcss";
+ *   @import "@haigis/component-library/theme.css";
+ *   @source "../node_modules/@haigis/component-library/dist";
+ *
+ * This file must be processed by the consuming app's Tailwind build
+ * (it uses @theme and @apply). Toggle dark mode by adding .dark to <html>.
+ */
+
+:root {
+  /* palette */
+  --paper: #f7f9fc;
+  --snow: #ffffff;
+  --mist: #edf2f8;
+  --cloud: #dbe5f0;
+  --slate: #64748b;
+  --ink: #0f172a;
+  --indigo: #635bff;
+  --blue: #3b82f6;
+  --cyan: #06b6d4;
+  --teal: #14b8a6;
+  --violet: #8b5cf6;
+  --coral: #ff7a59;
+
+  /* core theme */
+  --background: var(--paper);
+  --foreground: var(--ink);
+
+  --card: rgba(255, 255, 255, 0.78);
+  --card-foreground: var(--ink);
+
+  --popover: rgba(255, 255, 255, 0.94);
+  --popover-foreground: var(--ink);
+
+  --primary: var(--indigo);
+  --primary-foreground: #ffffff;
+
+  --secondary: #e9eefb;
+  --secondary-foreground: #1e293b;
+
+  --muted: #eef3f8;
+  --muted-foreground: #526077;
+
+  --accent: var(--cyan);
+  --accent-foreground: #06202a;
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: #d9e2ec;
+  --input: #d9e2ec;
+  --ring: color-mix(in srgb, var(--indigo) 70%, white 30%);
+
+  --chart-1: var(--indigo);
+  --chart-2: var(--cyan);
+  --chart-3: var(--teal);
+  --chart-4: var(--violet);
+  --chart-5: var(--coral);
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  --radius: 1rem;
+
+  /* hero */
+  --hero-bg-start: #0b1220;
+  --hero-bg-mid: #18274b;
+  --hero-bg-end: #123a68;
+  --hero-fg: #f8fbff;
+  --hero-fg-muted: color-mix(in srgb, white 82%, transparent);
+  --hero-chip-bg: color-mix(in srgb, white 10%, transparent);
+  --hero-chip-border: color-mix(in srgb, white 18%, transparent);
+  --hero-button-border: color-mix(in srgb, white 16%, transparent);
+  --hero-button-hover-bg: color-mix(in srgb, white 10%, transparent);
+  --hero-button-hover-border: color-mix(in srgb, white 28%, transparent);
+}
+
+.dark {
+  --background: #020817;
+  --foreground: #e6edf7;
+
+  --card: rgba(15, 23, 42, 0.82);
+  --card-foreground: #e6edf7;
+
+  --popover: rgba(15, 23, 42, 0.94);
+  --popover-foreground: #e6edf7;
+
+  --primary: #7c7cff;
+  --primary-foreground: #ffffff;
+
+  --secondary: #172036;
+  --secondary-foreground: #dbe7ff;
+
+  --muted: #0f1a2d;
+  --muted-foreground: #97a6ba;
+
+  --accent: #22d3ee;
+  --accent-foreground: #062430;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: #243247;
+  --input: #243247;
+  --ring: color-mix(in srgb, #7c7cff 70%, white 30%);
+
+  --chart-1: #7c7cff;
+  --chart-2: #22d3ee;
+  --chart-3: #2dd4bf;
+  --chart-4: #a78bfa;
+  --chart-5: #fb7185;
+
+  --hero-bg-start: #030712;
+  --hero-bg-mid: #111c37;
+  --hero-bg-end: #10325d;
+  --hero-fg: #f8fbff;
+  --hero-fg-muted: color-mix(in srgb, white 80%, transparent);
+  --hero-chip-bg: color-mix(in srgb, white 8%, transparent);
+  --hero-chip-border: color-mix(in srgb, white 14%, transparent);
+  --hero-button-border: color-mix(in srgb, white 16%, transparent);
+  --hero-button-hover-bg: color-mix(in srgb, white 10%, transparent);
+  --hero-button-hover-border: color-mix(in srgb, white 26%, transparent);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background:
+      radial-gradient(
+        circle at top left,
+        color-mix(in srgb, white 88%, var(--blue) 12%),
+        transparent 28%
+      ),
+      linear-gradient(180deg, var(--background) 0%, color-mix(in srgb, var(--background) 94%, white 6%) 100%);
+  }
+
+  h1 {
+    @apply scroll-m-20 text-5xl font-semibold tracking-tight text-balance text-foreground;
+  }
+
+  h2 {
+    @apply scroll-m-20 text-3xl font-semibold tracking-tight text-foreground;
+  }
+
+  h3 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight text-foreground;
+  }
+
+  p {
+    @apply leading-7 text-foreground;
+  }
+
+  small {
+    @apply text-sm font-medium leading-none;
+  }
+
+  code {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer components {
+  .site-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    color: var(--hero-fg);
+    background:
+      radial-gradient(
+        circle at 12% 18%,
+        color-mix(in srgb, var(--violet) 22%, transparent),
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at 88% 14%,
+        color-mix(in srgb, var(--cyan) 18%, transparent),
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at 78% 72%,
+        color-mix(in srgb, var(--teal) 16%, transparent),
+        transparent 26%
+      ),
+      linear-gradient(
+        135deg,
+        var(--hero-bg-start) 0%,
+        var(--hero-bg-mid) 56%,
+        var(--hero-bg-end) 100%
+      );
+    border-top: 1px solid color-mix(in srgb, white 14%, var(--border) 86%);
+    border-bottom: 1px solid color-mix(in srgb, white 10%, var(--border) 90%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 24px 60px rgba(15, 23, 42, 0.16);
+  }
+
+  .site-hero-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .site-hero-glow-right {
+    background:
+      radial-gradient(
+        circle at top right,
+        color-mix(in srgb, var(--cyan) 18%, transparent),
+        transparent 28%
+      );
+  }
+
+  .site-hero-glow-left {
+    background:
+      radial-gradient(
+        circle at left,
+        color-mix(in srgb, var(--violet) 16%, transparent),
+        transparent 26%
+      );
+  }
+
+  .site-hero-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid var(--hero-chip-border);
+    background: var(--hero-chip-bg);
+    padding: 0.35rem 0.85rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: color-mix(in srgb, white 88%, transparent);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.16),
+      0 8px 22px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(12px);
+  }
+
+  .site-hero-title {
+    color: var(--hero-fg);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+  }
+
+  .site-hero-body {
+    color: var(--hero-fg-muted);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.14);
+  }
+
+  .site-hero-button-primary,
+  .site-hero-button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding-inline: 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .site-hero-button-primary {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, white 8%, var(--indigo)),
+      color-mix(in srgb, white 6%, var(--blue)) 52%,
+      color-mix(in srgb, white 4%, var(--cyan))
+    ) !important;
+    border: 1px solid color-mix(in srgb, white 16%, var(--blue)) !important;
+    color: white !important;
+    box-shadow:
+      0 14px 34px color-mix(in srgb, var(--blue) 34%, transparent),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+  }
+
+  .site-hero-button-primary:hover {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, white 10%, var(--violet)),
+      color-mix(in srgb, white 8%, var(--indigo)) 50%,
+      color-mix(in srgb, white 6%, var(--cyan))
+    ) !important;
+    border-color: color-mix(in srgb, white 12%, var(--cyan)) !important;
+    color: white !important;
+    transform: translateY(-1px);
+  }
+
+  .site-hero-button-primary:focus-visible {
+    color: white !important;
+    outline: 2px solid color-mix(in srgb, white 28%, var(--cyan) 72%);
+    outline-offset: 3px;
+  }
+
+  .site-hero-button-secondary {
+    background: color-mix(in srgb, white 8%, transparent) !important;
+    border: 1px solid var(--hero-button-border) !important;
+    color: white !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      0 10px 26px rgba(0, 0, 0, 0.12) !important;
+    backdrop-filter: blur(10px);
+  }
+
+  .site-hero-button-secondary:hover {
+    background: var(--hero-button-hover-bg) !important;
+    border-color: var(--hero-button-hover-border) !important;
+    color: white !important;
+    transform: translateY(-1px);
+  }
+
+  .site-hero-button-secondary:focus-visible {
+    color: white !important;
+    outline: 2px solid color-mix(in srgb, white 30%, transparent);
+    outline-offset: 3px;
+  }
+
+  .site-card-alt {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, white 92%, var(--blue) 8%),
+      color-mix(in srgb, white 96%, var(--indigo) 4%)
+    );
+    border: 1px solid color-mix(in srgb, white 16%, var(--border) 84%);
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 14px 36px rgba(59, 130, 246, 0.08);
+    backdrop-filter: blur(10px);
+  }
+}
+
+.site-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 160rem;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, black 34%, var(--hero-bg-start)) 0%,
+      color-mix(in srgb, black 20%, var(--hero-bg-mid)) 36%,
+      color-mix(in srgb, transparent 20%, var(--cyan) 80%) 78%,
+      transparent 100%
+    );
+}
