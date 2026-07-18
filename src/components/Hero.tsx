@@ -63,7 +63,7 @@ export function Hero({
                 <div
                     className={cn(
                         `${gridClass} px-6 xl:px-8`,
-                        hasBreadcrumbs && "pt-10 lg:pt-14"
+                        hasBreadcrumbs && "pt-8 lg:pt-10"
                     )}
                 >
                     <div className={`${laneClass(width)} space-y-8`}>
