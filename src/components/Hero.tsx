@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { cn } from "../lib/utils"
 import { Button } from "./Button"
+import { Breadcrumbs, type BreadcrumbItem } from "./Breadcrumbs"
 import { gridClass, laneClass, type LaneWidth } from "./layout"
 
 export type HeroAction = {
@@ -12,6 +13,8 @@ export type HeroAction = {
 }
 
 export type HeroProps = {
+    /** Breadcrumb trail shown at the very top of the hero. */
+    breadcrumbs?: BreadcrumbItem[]
     /** Small pill label above the title. */
     chip?: string
     title: string
@@ -27,6 +30,7 @@ export type HeroProps = {
  * Styling ships in the package's theme.css (site-hero-* classes).
  */
 export function Hero({
+    breadcrumbs,
     chip,
     title,
     body,
@@ -43,6 +47,10 @@ export function Hero({
             <div className="relative mx-auto w-full max-w-[1600px] py-14 lg:py-20">
                 <div className={`${gridClass} px-6 xl:px-8`}>
                     <div className={`${laneClass(width)} space-y-8`}>
+                        {breadcrumbs?.length ? (
+                            <Breadcrumbs tone="hero" items={breadcrumbs} />
+                        ) : null}
+
                         {chip ? <div className="site-hero-chip">{chip}</div> : null}
 
                         <div className="space-y-5">

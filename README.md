@@ -126,6 +126,7 @@ Full-width dark gradient hero with glow effects (styles ship in `theme.css`).
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `title` | `string` | required | |
+| `breadcrumbs` | `BreadcrumbItem[]` | | Breadcrumb trail at the very top of the hero |
 | `chip` | `string` | | Pill label above the title |
 | `body` | `string` | | |
 | `actions` | `HeroAction[]` | | `{ label, href?, onClick?, variant?: "primary" \| "secondary" }` — gradient primary / glass secondary buttons |
@@ -134,25 +135,24 @@ Full-width dark gradient hero with glow effects (styles ship in `theme.css`).
 
 ### Breadcrumbs
 
-Breadcrumb trail, typically placed directly below the Hero. The last item is the current page (rendered as text with `aria-current="page"`); earlier items render as links (`href`) or buttons (`onClick`).
+Breadcrumb trail. The last item is the current page (rendered as text with `aria-current="page"`); earlier items render as links (`href`) or buttons (`onClick`).
+
+The usual placement is at the top of the hero via Hero's `breadcrumbs` prop (which uses `tone="hero"` automatically). Standalone use on a regular page:
 
 ```tsx
-<Hero title="Lorem ipsum dolor" … />
-
-<PageLane width={10}>
-    <Breadcrumbs
-        items={[
-            { label: "Home", href: "/" },
-            { label: "Products", href: "/products" },
-            { label: "Lorem ipsum dolor" },
-        ]}
-    />
-</PageLane>
+<Breadcrumbs
+    items={[
+        { label: "Home", href: "/" },
+        { label: "Products", href: "/products" },
+        { label: "Lorem ipsum dolor" },
+    ]}
+/>
 ```
 
 | Prop | Type | Notes |
 | --- | --- | --- |
 | `items` | `BreadcrumbItem[]` | `{ label, href?, onClick? }` |
+| `tone` | `"default" \| "hero"` | `hero` restyles for the dark Hero background |
 | `className` | `string` | |
 
 ### SiteFooter

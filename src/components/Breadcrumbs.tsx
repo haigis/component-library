@@ -11,19 +11,29 @@ export type BreadcrumbItem = {
 
 export type BreadcrumbsProps = {
     items: BreadcrumbItem[]
+    /** "hero" restyles for the dark Hero background. */
+    tone?: "default" | "hero"
     className?: string
 }
 
 /** Breadcrumb trail. The last item is the current page (not a link). */
-export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
-    const linkClass =
-        "underline-offset-4 transition-colors hover:text-foreground hover:underline"
+export function Breadcrumbs({ items, tone = "default", className }: BreadcrumbsProps) {
+    const isHero = tone === "hero"
+
+    const navClass = isHero
+        ? "site-hero-body text-sm"
+        : "text-sm text-muted-foreground"
+    const linkClass = cn(
+        "underline-offset-4 transition-colors hover:underline",
+        isHero ? "hover:text-[var(--hero-fg)]" : "hover:text-foreground"
+    )
+    const currentClass = cn(
+        "font-medium",
+        isHero ? "text-[var(--hero-fg)]" : "text-foreground"
+    )
 
     return (
-        <nav
-            aria-label="Breadcrumb"
-            className={cn("text-sm text-muted-foreground", className)}
-        >
+        <nav aria-label="Breadcrumb" className={cn(navClass, className)}>
             <ol className="flex flex-wrap items-center gap-1.5">
                 {items.map((item, index) => {
                     const isLast = index === items.length - 1
@@ -38,7 +48,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
                             ) : null}
 
                             {isLast ? (
-                                <span aria-current="page" className="font-medium text-foreground">
+                                <span aria-current="page" className={currentClass}>
                                     {item.label}
                                 </span>
                             ) : item.href ? (
