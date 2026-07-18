@@ -4,7 +4,7 @@ Mark's React component library, built with Tailwind CSS v4, [class-variance-auth
 
 Designed so every component prop is **JSON-serializable** (URLs instead of callbacks, icon names instead of components) — ready to be driven by a CMS such as Payload, where authors or agents compose pages from blocks.
 
-**Site components:** `SiteHeader`, `Hero`, `SiteFooter`
+**Site components:** `SiteHeader`, `Hero`, `Breadcrumbs`, `SiteFooter`
 **Content components:** `Button`, `Card` family, `SplitFeatureCard`, `ImageCard`
 **Layout:** `PageLane`, `Section`, `SectionIntro`, `CardGrid`
 **Helpers:** `cn`, `iconRegistry`/`iconNames`/`resolveIcon`, variant functions, layout class constants
@@ -131,6 +131,29 @@ Full-width dark gradient hero with glow effects (styles ship in `theme.css`).
 | `actions` | `HeroAction[]` | | `{ label, href?, onClick?, variant?: "primary" \| "secondary" }` — gradient primary / glass secondary buttons |
 | `width` | `8 \| 10 \| 12` | `10` | |
 | `titleId` | `string` | | For `aria-labelledby` |
+
+### Breadcrumbs
+
+Breadcrumb trail, typically placed directly below the Hero. The last item is the current page (rendered as text with `aria-current="page"`); earlier items render as links (`href`) or buttons (`onClick`).
+
+```tsx
+<Hero title="Lorem ipsum dolor" … />
+
+<PageLane width={10}>
+    <Breadcrumbs
+        items={[
+            { label: "Home", href: "/" },
+            { label: "Products", href: "/products" },
+            { label: "Lorem ipsum dolor" },
+        ]}
+    />
+</PageLane>
+```
+
+| Prop | Type | Notes |
+| --- | --- | --- |
+| `items` | `BreadcrumbItem[]` | `{ label, href?, onClick? }` |
+| `className` | `string` | |
 
 ### SiteFooter
 

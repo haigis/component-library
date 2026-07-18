@@ -24,6 +24,11 @@ export {
     type CardGridProps,
 } from "./components/layout"
 export { Hero, type HeroProps, type HeroAction } from "./components/Hero"
+export {
+    Breadcrumbs,
+    type BreadcrumbItem,
+    type BreadcrumbsProps,
+} from "./components/Breadcrumbs"
 export { SiteHeader, type SiteHeaderProps } from "./components/SiteHeader"
 export { SiteFooter, type SiteFooterProps } from "./components/SiteFooter"
 export {
