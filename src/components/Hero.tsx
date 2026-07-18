@@ -39,18 +39,34 @@ export function Hero({
     titleId,
     className,
 }: HeroProps) {
+    const hasBreadcrumbs = Boolean(breadcrumbs?.length)
+
     return (
         <section className={cn("site-hero", className)} aria-labelledby={titleId}>
             <div className="site-hero-glow site-hero-glow-right" />
             <div className="site-hero-glow site-hero-glow-left" />
 
-            <div className="relative mx-auto w-full max-w-[1600px] py-14 lg:py-20">
-                <div className={`${gridClass} px-6 xl:px-8`}>
-                    <div className={`${laneClass(width)} space-y-8`}>
-                        {breadcrumbs?.length ? (
-                            <Breadcrumbs tone="hero" items={breadcrumbs} />
-                        ) : null}
+            <div
+                className={cn(
+                    "relative mx-auto w-full max-w-[1600px] pb-14 lg:pb-20",
+                    hasBreadcrumbs ? "pt-5" : "pt-14 lg:pt-20"
+                )}
+            >
+                {hasBreadcrumbs ? (
+                    <div className={`${gridClass} px-6 xl:px-8`}>
+                        <div className={laneClass(width)}>
+                            <Breadcrumbs tone="hero" items={breadcrumbs!} />
+                        </div>
+                    </div>
+                ) : null}
 
+                <div
+                    className={cn(
+                        `${gridClass} px-6 xl:px-8`,
+                        hasBreadcrumbs && "pt-10 lg:pt-14"
+                    )}
+                >
+                    <div className={`${laneClass(width)} space-y-8`}>
                         {chip ? <div className="site-hero-chip">{chip}</div> : null}
 
                         <div className="space-y-5">
