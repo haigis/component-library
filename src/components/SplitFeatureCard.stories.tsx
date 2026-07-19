@@ -24,7 +24,7 @@ const items = [
 ]
 
 const meta = {
-    title: "Patterns/SplitFeatureCard",
+    title: "Patterns/Split Feature Card",
     component: SplitFeatureCard,
     parameters: {
         layout: "padded",
@@ -32,12 +32,22 @@ const meta = {
     args: {
         title: "Featured toolkits",
         description: "Focused workflows for common content operations tasks.",
-        linkLabel: "Browse all toolkits",
-        linkHref: "#toolkits",
+        actionLabel: "Browse all toolkits",
+        actionHref: "#toolkits",
+        actionStyle: "link",
+        actionVariant: "primary",
         items,
     },
     argTypes: {
-        onLinkClick: {
+        actionStyle: {
+            control: "radio",
+            options: ["link", "button"],
+        },
+        actionVariant: {
+            control: "select",
+            options: ["primary", "secondary", "outline"],
+        },
+        onAction: {
             control: false,
         },
         className: {
@@ -56,10 +66,17 @@ type Story = StoryObj<typeof meta>
 
 export const Playground: Story = {}
 
-export const WithoutIntroLink: Story = {
+export const WithoutIntroAction: Story = {
     args: {
-        linkLabel: undefined,
-        linkHref: undefined,
+        actionLabel: undefined,
+        actionHref: undefined,
+    },
+}
+
+export const ButtonAction: Story = {
+    args: {
+        actionStyle: "button",
+        actionVariant: "outline",
     },
 }
 
@@ -75,7 +92,7 @@ export const ButtonItems: Story = {
             ...item,
             onClick: () => undefined,
         })),
-        linkHref: undefined,
-        onLinkClick: () => undefined,
+        actionHref: undefined,
+        onAction: () => undefined,
     },
 }

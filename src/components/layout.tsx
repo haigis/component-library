@@ -37,14 +37,16 @@ export function SectionIntro({
     title,
     description,
     id,
+    headingLevel = "h2",
 }: {
     title: string
     description?: string
     id?: string
+    headingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 }) {
     return (
         <div className="space-y-2">
-            <Heading as="h2" size="section" id={id}>
+            <Heading as={headingLevel} size="section" id={id}>
                 {title}
             </Heading>
             {description ? (
@@ -60,15 +62,16 @@ export type SectionProps = {
     title?: string
     description?: string
     id?: string
+    headingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
     children: ReactNode
     className?: string
 }
 
 /** A page section: optional SectionIntro heading followed by content. */
-export function Section({ title, description, id, children, className }: SectionProps) {
+export function Section({ title, description, id, headingLevel, children, className }: SectionProps) {
     return (
         <section className={cn("space-y-6", className)} aria-labelledby={id}>
-            {title ? <SectionIntro id={id} title={title} description={description} /> : null}
+            {title ? <SectionIntro id={id} title={title} description={description} headingLevel={headingLevel} /> : null}
             {children}
         </section>
     )

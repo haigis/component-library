@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { cn } from "../lib/utils"
 import type { IconProp } from "../lib/icons"
+import { Button } from "./Button"
 import { cardClass } from "./card"
 import { Heading } from "./Heading"
 import { Icon } from "./Icon"
@@ -19,9 +20,12 @@ export type ImageCardProps = {
     body: React.ReactNode
     actionLabel?: string
     actionHref?: string
+    actionStyle?: "link" | "button"
+    actionVariant?: "primary" | "secondary" | "outline"
     onAction?: () => void
     image?: React.ReactNode
     imageAspectRatio?: string
+    headingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
     imageClassName?: string
     className?: string
 }
@@ -34,9 +38,12 @@ export function ImageCard({
     body,
     actionLabel,
     actionHref,
+    actionStyle = "link",
+    actionVariant = "primary",
     onAction,
     image,
     imageAspectRatio = "16 / 9",
+    headingLevel = "h3",
     imageClassName,
     className,
 }: ImageCardProps) {
@@ -99,7 +106,7 @@ export function ImageCard({
                         </div>
                     ) : null}
 
-                    <Heading as="h3" size="card">
+                    <Heading as={headingLevel} size="card">
                         {title}
                     </Heading>
 
@@ -111,7 +118,20 @@ export function ImageCard({
 
                     {actionLabel ? (
                         <div className="mt-5">
-                            {actionHref ? (
+                            {actionStyle === "button" ? (
+                                <Button
+                                    variant={actionVariant}
+                                    size="sm"
+                                    onClick={onAction}
+                                    asChild={Boolean(actionHref)}
+                                >
+                                    {actionHref ? (
+                                        <a href={actionHref}>{actionLabel}</a>
+                                    ) : (
+                                        actionLabel
+                                    )}
+                                </Button>
+                            ) : actionHref ? (
                                 <a
                                     href={actionHref}
                                     onClick={onAction}

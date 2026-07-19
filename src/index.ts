@@ -9,6 +9,17 @@ export {
 } from "./components/ThemeProvider"
 export { Button, buttonVariants, type ButtonProps } from "./components/Button"
 export {
+    DescriptionList,
+    DescriptionListItem,
+    DescriptionListTerm,
+    DescriptionListDescription,
+    descriptionListVariants,
+    type DescriptionListProps,
+    type DescriptionListItemProps,
+    type DescriptionListEntry,
+    type DescriptionListLayout,
+} from "./components/DescriptionList"
+export {
     Card,
     CardHeader,
     CardTitle,
@@ -34,7 +45,7 @@ export {
     type SectionProps,
     type CardGridProps,
 } from "./components/layout"
-export { Hero, type HeroProps, type HeroAction } from "./components/Hero"
+export { Hero, type HeroProps, type HeroAction, type HeroVariant } from "./components/Hero"
 export {
     Breadcrumbs,
     type BreadcrumbItem,
@@ -47,6 +58,12 @@ export {
     type SplitFeatureCardItem,
     type SplitFeatureCardProps,
 } from "./components/SplitFeatureCard"
+export {
+    SplitPanel,
+    type SplitPanelProps,
+    type SplitPanelItem,
+    type SplitPanelTone,
+} from "./components/SplitPanel"
 export { Icon, type IconProps, type IconSize } from "./components/Icon"
 export {
     ImageCard,

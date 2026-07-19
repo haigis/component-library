@@ -606,72 +606,51 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 3rem;
-    padding-inline: 1.25rem;
-    border-radius: 999px;
-    font-weight: 600;
+    min-height: 2.75rem;
+    padding-inline: 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: 0.875rem;
     line-height: 1;
     white-space: nowrap;
     text-decoration: none;
     transition:
-      background 0.2s ease,
-      border-color 0.2s ease,
-      color 0.2s ease,
-      box-shadow 0.2s ease,
-      transform 0.2s ease;
+      background 0.15s ease,
+      border-color 0.15s ease,
+      opacity 0.15s ease;
   }
 
   .site-hero-button-primary {
-    background: linear-gradient(
-      135deg,
-      color-mix(in srgb, white 8%, var(--primary)),
-      color-mix(in srgb, var(--primary) 72%, var(--accent) 28%)
-    ) !important;
-    border: 1px solid color-mix(in srgb, white 18%, var(--primary)) !important;
+    background: var(--primary) !important;
+    border: 1px solid transparent !important;
     color: var(--primary-foreground) !important;
-    box-shadow:
-      0 14px 34px color-mix(in srgb, var(--primary) 32%, transparent),
-      inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
   }
 
   .site-hero-button-primary:hover {
-    background: linear-gradient(
-      135deg,
-      color-mix(in srgb, white 12%, var(--primary)),
-      color-mix(in srgb, var(--primary) 62%, var(--accent) 38%)
-    ) !important;
-    border-color: color-mix(in srgb, white 20%, var(--accent)) !important;
-    color: var(--primary-foreground) !important;
-    transform: translateY(-1px);
+    opacity: 0.9;
   }
 
   .site-hero-button-primary:focus-visible {
     color: var(--primary-foreground) !important;
-    outline: 2px solid color-mix(in srgb, white 28%, var(--accent) 72%);
-    outline-offset: 3px;
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
   }
 
   .site-hero-button-secondary {
-    background: color-mix(in srgb, white 8%, transparent) !important;
-    border: 1px solid var(--hero-button-border) !important;
-    color: white !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.14),
-      0 10px 26px rgba(0, 0, 0, 0.12) !important;
-    backdrop-filter: blur(10px);
+    background: transparent !important;
+    border: 1px solid color-mix(in srgb, white 20%, transparent) !important;
+    color: color-mix(in srgb, white 90%, transparent) !important;
   }
 
   .site-hero-button-secondary:hover {
-    background: var(--hero-button-hover-bg) !important;
-    border-color: var(--hero-button-hover-border) !important;
-    color: white !important;
-    transform: translateY(-1px);
+    background: color-mix(in srgb, white 10%, transparent) !important;
+    border-color: color-mix(in srgb, white 30%, transparent) !important;
   }
 
   .site-hero-button-secondary:focus-visible {
     color: white !important;
     outline: 2px solid color-mix(in srgb, white 30%, transparent);
-    outline-offset: 3px;
+    outline-offset: 2px;
   }
 
   .site-card-alt {

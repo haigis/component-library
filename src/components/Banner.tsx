@@ -32,6 +32,7 @@ export type BannerProps = {
     mediaClassName?: string
     action?: BannerAction
     actionPosition?: "left" | "right" | "below"
+    headingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
     tone?: "default" | "alt" | "muted" | "elevated"
     className?: string
 }
@@ -100,6 +101,7 @@ export function Banner({
     mediaClassName,
     action,
     actionPosition = "right",
+    headingLevel = "h3",
     tone = "default",
     className,
 }: BannerProps) {
@@ -167,7 +169,7 @@ export function Banner({
                             {eyebrow ? (
                                 <Text size="sm" tone="primary" weight="medium">{eyebrow}</Text>
                             ) : null}
-                            <Heading as="h3" size="card">
+                            <Heading as={headingLevel} size="card">
                                 {title}
                             </Heading>
                             {body ? (

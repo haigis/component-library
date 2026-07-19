@@ -45,6 +45,7 @@
     "react-dom": "^18 || ^19"
   },
   "devDependencies": {
+    "@esbuild/win32-x64": "^0.28.1",
     "@storybook/addon-a11y": "^10.5.2",
     "@storybook/addon-docs": "^10.5.2",
     "@storybook/react-vite": "^10.5.2",
