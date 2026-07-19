@@ -37,6 +37,11 @@ export {
     type SplitFeatureCardProps,
 } from "./components/SplitFeatureCard"
 export { ImageCard, type ImageCardProps } from "./components/ImageCard"
+export {
+    Banner,
+    type BannerProps,
+    type BannerAction,
+} from "./components/Banner"
 export { cn } from "./lib/utils"
 export type { NavItem } from "./lib/nav"
 export {
