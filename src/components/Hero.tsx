@@ -5,7 +5,7 @@ import { Button } from "./Button"
 import { Breadcrumbs, type BreadcrumbItem } from "./Breadcrumbs"
 import { Heading } from "./Heading"
 import { Icon } from "./Icon"
-import { gridClass, laneClass, type LaneWidth } from "./layout"
+import { shellClass, gridClass, laneClass, type LaneWidth } from "./layout"
 import { Text } from "./Text"
 
 export type HeroAction = {
@@ -35,7 +35,7 @@ export type HeroProps = {
 
 function HeroBreadcrumbs({ breadcrumbs, width, tone }: { breadcrumbs: BreadcrumbItem[]; width: LaneWidth; tone: "hero" | "default" }) {
     return (
-        <div className={`${gridClass} px-6 xl:px-8`}>
+        <div className={gridClass}>
             <div className={laneClass(width)}>
                 <Breadcrumbs tone={tone} items={breadcrumbs} />
             </div>
@@ -179,7 +179,7 @@ function DefaultHero({ breadcrumbs, chip, title, body, actions, headingLevel, wi
 
             <div
                 className={cn(
-                    "relative mx-auto w-full max-w-[1600px] pb-14 lg:pb-20",
+                    `relative ${shellClass} pb-14 lg:pb-20`,
                     hasBreadcrumbs ? "pt-5" : "pt-14 lg:pt-20"
                 )}
             >
@@ -187,7 +187,7 @@ function DefaultHero({ breadcrumbs, chip, title, body, actions, headingLevel, wi
 
                 <div
                     className={cn(
-                        `${gridClass} px-6 xl:px-8`,
+                        gridClass,
                         hasBreadcrumbs && "pt-10 lg:pt-14"
                     )}
                 >
@@ -211,7 +211,7 @@ function SplitHero({ breadcrumbs, chip, title, body, actions, image, imagePositi
 
             <div
                 className={cn(
-                    "relative mx-auto w-full max-w-[1600px] pb-14 lg:pb-20",
+                    `relative ${shellClass} pb-14 lg:pb-20`,
                     hasBreadcrumbs ? "pt-5" : "pt-14 lg:pt-20"
                 )}
             >
@@ -219,7 +219,7 @@ function SplitHero({ breadcrumbs, chip, title, body, actions, image, imagePositi
 
                 <div
                     className={cn(
-                        `${gridClass} px-6 xl:px-8`,
+                        gridClass,
                         hasBreadcrumbs && "pt-10 lg:pt-14"
                     )}
                 >
@@ -253,7 +253,7 @@ function CenteredHero({ breadcrumbs, chip, title, body, actions, image, headingL
 
             <div
                 className={cn(
-                    "relative mx-auto w-full max-w-[1600px] pb-14 lg:pb-20",
+                    `relative ${shellClass} pb-14 lg:pb-20`,
                     hasBreadcrumbs ? "pt-5" : "pt-14 lg:pt-20"
                 )}
             >
@@ -261,7 +261,7 @@ function CenteredHero({ breadcrumbs, chip, title, body, actions, image, headingL
 
                 <div
                     className={cn(
-                        `${gridClass} px-6 xl:px-8`,
+                        gridClass,
                         hasBreadcrumbs && "pt-10 lg:pt-14"
                     )}
                 >
@@ -294,7 +294,7 @@ function MinimalHero({ breadcrumbs, chip, title, body, actions, image, imagePosi
         >
             <div
                 className={cn(
-                    "relative mx-auto w-full max-w-[1600px] pb-10 lg:pb-14",
+                    `relative ${shellClass} pb-10 lg:pb-14`,
                     hasBreadcrumbs ? "pt-5" : "pt-10 lg:pt-14"
                 )}
             >
@@ -302,7 +302,7 @@ function MinimalHero({ breadcrumbs, chip, title, body, actions, image, imagePosi
 
                 <div
                     className={cn(
-                        `${gridClass} px-6 xl:px-8`,
+                        gridClass,
                         hasBreadcrumbs && "pt-8 lg:pt-10"
                     )}
                 >

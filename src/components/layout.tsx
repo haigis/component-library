@@ -50,7 +50,7 @@ export function SectionIntro({
                 {title}
             </Heading>
             {description ? (
-                <Text tone="muted" className="max-w-3xl">
+                <Text tone="muted" className="max-w-prose">
                     {description}
                 </Text>
             ) : null}
