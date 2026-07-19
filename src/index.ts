@@ -1,3 +1,12 @@
+export { Heading, headingVariants, type HeadingProps, type HeadingLevel } from "./components/Heading"
+export { Text, textVariants, type TextProps, type TextElement } from "./components/Text"
+export {
+    ThemeProvider,
+    colorThemeNames,
+    type ThemeProviderProps,
+    type ColorTheme,
+    type ThemeMode,
+} from "./components/ThemeProvider"
 export { Button, buttonVariants, type ButtonProps } from "./components/Button"
 export {
     Card,
@@ -10,6 +19,8 @@ export {
     cardClass,
     cardVariants,
     type CardProps,
+    type CardTitleProps,
+    type CardDescriptionProps,
 } from "./components/card"
 export {
     PageLane,
@@ -36,11 +47,17 @@ export {
     type SplitFeatureCardItem,
     type SplitFeatureCardProps,
 } from "./components/SplitFeatureCard"
-export { ImageCard, type ImageCardProps } from "./components/ImageCard"
+export { Icon, type IconProps, type IconSize } from "./components/Icon"
+export {
+    ImageCard,
+    type ImageCardProps,
+    type ImageCardIconPosition,
+} from "./components/ImageCard"
 export {
     Banner,
     type BannerProps,
     type BannerAction,
+    type BannerIconPosition,
 } from "./components/Banner"
 export { cn } from "./lib/utils"
 export type { NavItem } from "./lib/nav"

@@ -3,6 +3,7 @@ import * as React from "react"
 import { cn } from "../lib/utils"
 import type { NavItem } from "../lib/nav"
 import { shellClass, gridClass, laneClass, type LaneWidth } from "./layout"
+import { Text } from "./Text"
 
 export type SiteFooterProps = {
     brand: React.ReactNode
@@ -30,8 +31,8 @@ export function SiteFooter({
                         className={`${laneClass(width)} flex flex-col gap-4 py-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between`}
                     >
                         <div>
-                            <p className="font-medium text-foreground">{brand}</p>
-                            {tagline ? <p>{tagline}</p> : null}
+                            <Text size="sm" weight="medium">{brand}</Text>
+                            {tagline ? <Text size="sm" tone="muted">{tagline}</Text> : null}
                         </div>
 
                         {items.length ? (

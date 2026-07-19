@@ -1,9 +1,10 @@
 import * as React from "react"
-import { Menu, X } from "lucide-react"
 
 import { cn } from "../lib/utils"
+import { Icon } from "./Icon"
 import type { NavItem } from "../lib/nav"
 import { shellClass, gridClass, laneClass, type LaneWidth } from "./layout"
+import { Text } from "./Text"
 
 export type SiteHeaderProps = {
     brand: React.ReactNode
@@ -100,7 +101,7 @@ export function SiteHeader({
                                 onClick={() => setMenuOpen((open) => !open)}
                                 className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-foreground shadow-sm transition-colors hover:bg-muted md:hidden"
                             >
-                                {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                                {menuOpen ? <Icon icon="x" size="md" /> : <Icon icon="menu" size="md" />}
                             </button>
                         ) : null}
                     </div>
@@ -125,9 +126,9 @@ export function SiteHeader({
                                             <>
                                                 <span>{item.label}</span>
                                                 {isActive ? (
-                                                    <span className="text-xs font-medium text-primary">
+                                                    <Text as="span" size="xs" tone="primary" weight="medium">
                                                         Current
-                                                    </span>
+                                                    </Text>
                                                 ) : null}
                                             </>
                                         )

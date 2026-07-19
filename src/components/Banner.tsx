@@ -1,8 +1,12 @@
 import * as React from "react"
 
 import { cn } from "../lib/utils"
+import type { IconProp } from "../lib/icons"
 import { Button, type ButtonProps } from "./Button"
 import { cardClass } from "./card"
+import { Heading } from "./Heading"
+import { Icon } from "./Icon"
+import { Text } from "./Text"
 
 export type BannerAction = {
     label: string
@@ -11,18 +15,23 @@ export type BannerAction = {
     variant?: ButtonProps["variant"]
 }
 
+export type BannerIconPosition = "top" | "left" | "right"
+
 export type BannerProps = {
     eyebrow?: string
     title: string
     /** Plain string, or rich content (multiple paragraphs, CMS rich text). */
     body?: React.ReactNode
-    /** Image or icon rendered in a fixed side slot. */
+    /** Supporting icon rendered with the text content. */
+    icon?: IconProp
+    iconPosition?: BannerIconPosition
+    /** Image or rich media rendered in its own fixed slot. */
     media?: React.ReactNode
-    mediaPosition?: "left" | "right"
+    mediaPosition?: "left" | "right" | "top"
     mediaAspectRatio?: string
     mediaClassName?: string
     action?: BannerAction
-    actionPosition?: "left" | "right"
+    actionPosition?: "left" | "right" | "below"
     tone?: "default" | "alt" | "muted" | "elevated"
     className?: string
 }
@@ -35,12 +44,25 @@ function MediaSlot({
     return (
         <div
             className={cn(
-                "flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-background md:h-24 md:w-24",
+                "flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-background text-primary md:h-24 md:w-24",
                 mediaClassName
             )}
             style={mediaAspectRatio ? { aspectRatio: mediaAspectRatio } : undefined}
         >
             {media}
+        </div>
+    )
+}
+
+function IconSlot({ icon, className }: { icon: IconProp; className?: string }) {
+    return (
+        <div
+            className={cn(
+                "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-background text-primary",
+                className
+            )}
+        >
+            <Icon icon={icon} size="md" />
         </div>
     )
 }
@@ -66,16 +88,12 @@ function ActionSlot({ action }: { action: BannerAction }) {
     )
 }
 
-/**
- * Horizontal banner: optional media and action pinned to either side.
- * The content block (eyebrow/title/body) fills whatever space is left,
- * so the three sections auto-space themselves regardless of which
- * optional pieces are present.
- */
 export function Banner({
     eyebrow,
     title,
     body,
+    icon,
+    iconPosition = "top",
     media,
     mediaPosition = "left",
     mediaAspectRatio,
@@ -85,14 +103,17 @@ export function Banner({
     tone = "default",
     className,
 }: BannerProps) {
-    const renderSlot = (position: "left" | "right") => {
+    const isTopMedia = Boolean(media) && mediaPosition === "top"
+    const isBelowAction = actionPosition === "below"
+
+    const renderSideSlot = (position: "left" | "right") => {
         const showMedia = Boolean(media) && mediaPosition === position
         const showAction = Boolean(action) && actionPosition === position
 
         if (!showMedia && !showAction) return null
 
         return (
-            <div className="flex shrink-0 flex-col items-start gap-4 md:items-center">
+            <div className="flex shrink-0 items-center gap-4">
                 {showMedia ? (
                     <MediaSlot
                         media={media}
@@ -109,26 +130,67 @@ export function Banner({
         <article
             className={cardClass({
                 tone,
-                className: cn("flex flex-col gap-6 md:flex-row md:items-center", className),
+                className: cn("overflow-hidden", isTopMedia && "p-0", className),
             })}
         >
-            {renderSlot("left")}
+            {isTopMedia ? (
+                <div
+                    className={cn("overflow-hidden", mediaClassName)}
+                    style={{ aspectRatio: mediaAspectRatio || "16 / 9" }}
+                >
+                    {media}
+                </div>
+            ) : null}
 
-            <div className="min-w-0 flex-1 space-y-2">
-                {eyebrow ? (
-                    <p className="text-sm font-medium text-primary">{eyebrow}</p>
-                ) : null}
-                <h3 className="text-xl font-semibold tracking-tight text-foreground">
-                    {title}
-                </h3>
-                {body ? (
-                    <div className="space-y-3 text-sm text-muted-foreground [&_p]:leading-6">
-                        {typeof body === "string" ? <p>{body}</p> : body}
+            <div
+                className={cn(
+                    "flex flex-col gap-6 md:flex-row md:items-center",
+                    isTopMedia && "p-6"
+                )}
+            >
+                {renderSideSlot("left")}
+
+                <div
+                    className={cn(
+                        "flex min-w-0 flex-1",
+                        icon && iconPosition !== "top" ? "items-start gap-4" : "flex-col"
+                    )}
+                >
+                    {icon && iconPosition === "left" ? <IconSlot icon={icon} /> : null}
+
+                    <div className="min-w-0 flex-1">
+                        {icon && iconPosition === "top" ? (
+                            <IconSlot icon={icon} className="mb-4" />
+                        ) : null}
+
+                        <div className="space-y-2">
+                            {eyebrow ? (
+                                <Text size="sm" tone="primary" weight="medium">{eyebrow}</Text>
+                            ) : null}
+                            <Heading as="h3" size="card">
+                                {title}
+                            </Heading>
+                            {body ? (
+                                <div className="space-y-3 text-sm text-muted-foreground [&_p]:text-inherit [&_p]:leading-6">
+                                    {typeof body === "string" ? (
+                                        <Text size="sm" tone="muted">{body}</Text>
+                                    ) : body}
+                                </div>
+                            ) : null}
+                        </div>
+
+                        {isBelowAction && action ? (
+                            <div className="pt-5">
+                                <ActionSlot action={action} />
+                            </div>
+                        ) : null}
                     </div>
-                ) : null}
-            </div>
 
-            {renderSlot("right")}
+                    {icon && iconPosition === "right" ? <IconSlot icon={icon} /> : null}
+                </div>
+
+                {renderSideSlot("right")}
+            </div>
         </article>
     )
 }

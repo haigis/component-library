@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "../theme.css";
+@source "../src";
+
+html,
+body,
+#storybook-root {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.sb-show-main.sb-main-padded {
+    padding: 2rem;
+}

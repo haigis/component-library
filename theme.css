@@ -1,5 +1,5 @@
 /*
- * @haigis/component-library — design tokens and component styles.
+ * @haigis/component-library - design tokens and component styles.
  *
  * Usage (Tailwind CSS v4), in your app's CSS entry:
  *
@@ -7,12 +7,11 @@
  *   @import "@haigis/component-library/theme.css";
  *   @source "../node_modules/@haigis/component-library/dist";
  *
- * This file must be processed by the consuming app's Tailwind build
- * (it uses @theme and @apply). Toggle dark mode by adding .dark to <html>.
+ * Use ThemeProvider for scoped themes. The legacy .dark class remains supported.
  */
 
 :root {
-  /* palette */
+  /* shared palette */
   --paper: #f7f9fc;
   --snow: #ffffff;
   --mist: #edf2f8;
@@ -26,41 +25,6 @@
   --violet: #8b5cf6;
   --coral: #ff7a59;
 
-  /* core theme */
-  --background: var(--paper);
-  --foreground: var(--ink);
-
-  --card: rgba(255, 255, 255, 0.78);
-  --card-foreground: var(--ink);
-
-  --popover: rgba(255, 255, 255, 0.94);
-  --popover-foreground: var(--ink);
-
-  --primary: var(--indigo);
-  --primary-foreground: #ffffff;
-
-  --secondary: #e9eefb;
-  --secondary-foreground: #1e293b;
-
-  --muted: #eef3f8;
-  --muted-foreground: #526077;
-
-  --accent: var(--cyan);
-  --accent-foreground: #06202a;
-
-  --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
-
-  --border: #d9e2ec;
-  --input: #d9e2ec;
-  --ring: color-mix(in srgb, var(--indigo) 70%, white 30%);
-
-  --chart-1: var(--indigo);
-  --chart-2: var(--cyan);
-  --chart-3: var(--teal);
-  --chart-4: var(--violet);
-  --chart-5: var(--coral);
-
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
@@ -72,65 +36,414 @@
     "Liberation Mono", "Courier New", monospace;
 
   --radius: 1rem;
-
-  /* hero */
-  --hero-bg-start: #0b1220;
-  --hero-bg-mid: #18274b;
-  --hero-bg-end: #123a68;
-  --hero-fg: #f8fbff;
-  --hero-fg-muted: color-mix(in srgb, white 82%, transparent);
-  --hero-chip-bg: color-mix(in srgb, white 10%, transparent);
-  --hero-chip-border: color-mix(in srgb, white 18%, transparent);
-  --hero-button-border: color-mix(in srgb, white 16%, transparent);
-  --hero-button-hover-bg: color-mix(in srgb, white 10%, transparent);
-  --hero-button-hover-border: color-mix(in srgb, white 28%, transparent);
 }
 
-.dark {
-  --background: #020817;
-  --foreground: #e6edf7;
+/*
+ * Each named palette supplies both light and dark source values. Components only
+ * consume the semantic aliases below, so a theme can be scoped to any subtree.
+ */
+:root,
+[data-theme="indigo"] {
+  --theme-light-background: #f7f9fc;
+  --theme-light-foreground: #0f172a;
+  --theme-light-card: rgba(255, 255, 255, 0.82);
+  --theme-light-card-foreground: #0f172a;
+  --theme-light-popover: rgba(255, 255, 255, 0.96);
+  --theme-light-popover-foreground: #0f172a;
+  --theme-light-primary: #635bff;
+  --theme-light-primary-foreground: #ffffff;
+  --theme-light-secondary: #e9eefb;
+  --theme-light-secondary-foreground: #1e293b;
+  --theme-light-muted: #eef3f8;
+  --theme-light-muted-foreground: #526077;
+  --theme-light-accent: #0891b2;
+  --theme-light-accent-foreground: #06202a;
+  --theme-light-destructive: #dc2626;
+  --theme-light-destructive-foreground: #ffffff;
+  --theme-light-border: #d9e2ec;
+  --theme-light-input: #d9e2ec;
+  --theme-light-ring: color-mix(in srgb, #635bff 70%, white 30%);
+  --theme-light-chart-1: #635bff;
+  --theme-light-chart-2: #0891b2;
+  --theme-light-chart-3: #0f9f8f;
+  --theme-light-chart-4: #8b5cf6;
+  --theme-light-chart-5: #e85d3f;
+  --theme-light-hero-bg-start: #0b1220;
+  --theme-light-hero-bg-mid: #18274b;
+  --theme-light-hero-bg-end: #123a68;
+  --theme-light-hero-fg: #f8fbff;
+  --theme-light-hero-fg-muted: color-mix(in srgb, white 82%, transparent);
+  --theme-light-hero-chip-bg: color-mix(in srgb, white 10%, transparent);
+  --theme-light-hero-chip-border: color-mix(in srgb, white 18%, transparent);
+  --theme-light-hero-button-border: color-mix(in srgb, white 16%, transparent);
+  --theme-light-hero-button-hover-bg: color-mix(in srgb, white 10%, transparent);
+  --theme-light-hero-button-hover-border: color-mix(in srgb, white 28%, transparent);
+  --theme-dark-background: #020817;
+  --theme-dark-foreground: #e6edf7;
+  --theme-dark-card: rgba(15, 23, 42, 0.86);
+  --theme-dark-card-foreground: #e6edf7;
+  --theme-dark-popover: rgba(15, 23, 42, 0.96);
+  --theme-dark-popover-foreground: #e6edf7;
+  --theme-dark-primary: #8b8bff;
+  --theme-dark-primary-foreground: #11113d;
+  --theme-dark-secondary: #172036;
+  --theme-dark-secondary-foreground: #dbe7ff;
+  --theme-dark-muted: #0f1a2d;
+  --theme-dark-muted-foreground: #a9b6c8;
+  --theme-dark-accent: #22d3ee;
+  --theme-dark-accent-foreground: #062430;
+  --theme-dark-destructive: #f05252;
+  --theme-dark-destructive-foreground: #450a0a;
+  --theme-dark-border: #2b3b52;
+  --theme-dark-input: #2b3b52;
+  --theme-dark-ring: color-mix(in srgb, #8b8bff 70%, white 30%);
+  --theme-dark-chart-1: #8b8bff;
+  --theme-dark-chart-2: #22d3ee;
+  --theme-dark-chart-3: #2dd4bf;
+  --theme-dark-chart-4: #a78bfa;
+  --theme-dark-chart-5: #fb7185;
+  --theme-dark-hero-bg-start: #030712;
+  --theme-dark-hero-bg-mid: #111c37;
+  --theme-dark-hero-bg-end: #10325d;
+  --theme-dark-hero-fg: #f8fbff;
+  --theme-dark-hero-fg-muted: color-mix(in srgb, white 80%, transparent);
+  --theme-dark-hero-chip-bg: color-mix(in srgb, white 8%, transparent);
+  --theme-dark-hero-chip-border: color-mix(in srgb, white 14%, transparent);
+  --theme-dark-hero-button-border: color-mix(in srgb, white 16%, transparent);
+  --theme-dark-hero-button-hover-bg: color-mix(in srgb, white 10%, transparent);
+  --theme-dark-hero-button-hover-border: color-mix(in srgb, white 26%, transparent);
+}
 
-  --card: rgba(15, 23, 42, 0.82);
-  --card-foreground: #e6edf7;
+[data-theme="ocean"] {
+  --theme-light-background: #f4f9fb;
+  --theme-light-foreground: #10212e;
+  --theme-light-card: rgba(255, 255, 255, 0.86);
+  --theme-light-card-foreground: #10212e;
+  --theme-light-popover: rgba(255, 255, 255, 0.97);
+  --theme-light-popover-foreground: #10212e;
+  --theme-light-primary: #0369a1;
+  --theme-light-primary-foreground: #ffffff;
+  --theme-light-secondary: #dff1f8;
+  --theme-light-secondary-foreground: #0c4a6e;
+  --theme-light-muted: #eaf3f5;
+  --theme-light-muted-foreground: #4b6670;
+  --theme-light-accent: #0f766e;
+  --theme-light-accent-foreground: #ffffff;
+  --theme-light-destructive: #c93636;
+  --theme-light-destructive-foreground: #ffffff;
+  --theme-light-border: #cfe1e7;
+  --theme-light-input: #cfe1e7;
+  --theme-light-ring: color-mix(in srgb, #0284c7 70%, white 30%);
+  --theme-light-chart-1: #0369a1;
+  --theme-light-chart-2: #0f766e;
+  --theme-light-chart-3: #ca8a04;
+  --theme-light-chart-4: #7c3aed;
+  --theme-light-chart-5: #df5f4a;
+  --theme-light-hero-bg-start: #071b2b;
+  --theme-light-hero-bg-mid: #0b4f6c;
+  --theme-light-hero-bg-end: #0f766e;
+  --theme-light-hero-fg: #f0fbff;
+  --theme-light-hero-fg-muted: color-mix(in srgb, white 84%, transparent);
+  --theme-light-hero-chip-bg: color-mix(in srgb, white 10%, transparent);
+  --theme-light-hero-chip-border: color-mix(in srgb, white 20%, transparent);
+  --theme-light-hero-button-border: color-mix(in srgb, white 18%, transparent);
+  --theme-light-hero-button-hover-bg: color-mix(in srgb, white 11%, transparent);
+  --theme-light-hero-button-hover-border: color-mix(in srgb, white 30%, transparent);
+  --theme-dark-background: #03141d;
+  --theme-dark-foreground: #e8f6fb;
+  --theme-dark-card: rgba(7, 31, 43, 0.88);
+  --theme-dark-card-foreground: #e8f6fb;
+  --theme-dark-popover: rgba(7, 31, 43, 0.97);
+  --theme-dark-popover-foreground: #e8f6fb;
+  --theme-dark-primary: #38bdf8;
+  --theme-dark-primary-foreground: #082f49;
+  --theme-dark-secondary: #0c3142;
+  --theme-dark-secondary-foreground: #dff7ff;
+  --theme-dark-muted: #092735;
+  --theme-dark-muted-foreground: #a2bdc7;
+  --theme-dark-accent: #2dd4bf;
+  --theme-dark-accent-foreground: #042f2e;
+  --theme-dark-destructive: #fb7185;
+  --theme-dark-destructive-foreground: #4c0519;
+  --theme-dark-border: #205268;
+  --theme-dark-input: #205268;
+  --theme-dark-ring: color-mix(in srgb, #38bdf8 72%, white 28%);
+  --theme-dark-chart-1: #38bdf8;
+  --theme-dark-chart-2: #2dd4bf;
+  --theme-dark-chart-3: #facc15;
+  --theme-dark-chart-4: #a78bfa;
+  --theme-dark-chart-5: #fb7185;
+  --theme-dark-hero-bg-start: #020b12;
+  --theme-dark-hero-bg-mid: #063047;
+  --theme-dark-hero-bg-end: #0b5d60;
+  --theme-dark-hero-fg: #f0fbff;
+  --theme-dark-hero-fg-muted: color-mix(in srgb, white 82%, transparent);
+  --theme-dark-hero-chip-bg: color-mix(in srgb, white 8%, transparent);
+  --theme-dark-hero-chip-border: color-mix(in srgb, white 16%, transparent);
+  --theme-dark-hero-button-border: color-mix(in srgb, white 18%, transparent);
+  --theme-dark-hero-button-hover-bg: color-mix(in srgb, white 10%, transparent);
+  --theme-dark-hero-button-hover-border: color-mix(in srgb, white 28%, transparent);
+}
 
-  --popover: rgba(15, 23, 42, 0.94);
-  --popover-foreground: #e6edf7;
+[data-theme="forest"] {
+  --theme-light-background: #f5f8f5;
+  --theme-light-foreground: #14251b;
+  --theme-light-card: rgba(255, 255, 255, 0.86);
+  --theme-light-card-foreground: #14251b;
+  --theme-light-popover: rgba(255, 255, 255, 0.97);
+  --theme-light-popover-foreground: #14251b;
+  --theme-light-primary: #16734a;
+  --theme-light-primary-foreground: #ffffff;
+  --theme-light-secondary: #e3f2e9;
+  --theme-light-secondary-foreground: #174c32;
+  --theme-light-muted: #eaf2ed;
+  --theme-light-muted-foreground: #53685a;
+  --theme-light-accent: #a64b08;
+  --theme-light-accent-foreground: #ffffff;
+  --theme-light-destructive: #c93636;
+  --theme-light-destructive-foreground: #ffffff;
+  --theme-light-border: #d2e1d7;
+  --theme-light-input: #d2e1d7;
+  --theme-light-ring: color-mix(in srgb, #228b5d 70%, white 30%);
+  --theme-light-chart-1: #16734a;
+  --theme-light-chart-2: #a64b08;
+  --theme-light-chart-3: #0e7490;
+  --theme-light-chart-4: #6d5ac7;
+  --theme-light-chart-5: #d84f68;
+  --theme-light-hero-bg-start: #071b14;
+  --theme-light-hero-bg-mid: #174c32;
+  --theme-light-hero-bg-end: #1f6b52;
+  --theme-light-hero-fg: #f3fff7;
+  --theme-light-hero-fg-muted: color-mix(in srgb, white 84%, transparent);
+  --theme-light-hero-chip-bg: color-mix(in srgb, white 10%, transparent);
+  --theme-light-hero-chip-border: color-mix(in srgb, white 20%, transparent);
+  --theme-light-hero-button-border: color-mix(in srgb, white 18%, transparent);
+  --theme-light-hero-button-hover-bg: color-mix(in srgb, white 11%, transparent);
+  --theme-light-hero-button-hover-border: color-mix(in srgb, white 30%, transparent);
+  --theme-dark-background: #06150e;
+  --theme-dark-foreground: #eaf7ef;
+  --theme-dark-card: rgba(9, 35, 23, 0.88);
+  --theme-dark-card-foreground: #eaf7ef;
+  --theme-dark-popover: rgba(9, 35, 23, 0.97);
+  --theme-dark-popover-foreground: #eaf7ef;
+  --theme-dark-primary: #4ade80;
+  --theme-dark-primary-foreground: #052e16;
+  --theme-dark-secondary: #123b29;
+  --theme-dark-secondary-foreground: #dcfce7;
+  --theme-dark-muted: #0d2d20;
+  --theme-dark-muted-foreground: #a5c5b1;
+  --theme-dark-accent: #fbbf24;
+  --theme-dark-accent-foreground: #422006;
+  --theme-dark-destructive: #fb7185;
+  --theme-dark-destructive-foreground: #4c0519;
+  --theme-dark-border: #28553d;
+  --theme-dark-input: #28553d;
+  --theme-dark-ring: color-mix(in srgb, #4ade80 70%, white 30%);
+  --theme-dark-chart-1: #4ade80;
+  --theme-dark-chart-2: #fbbf24;
+  --theme-dark-chart-3: #22d3ee;
+  --theme-dark-chart-4: #a78bfa;
+  --theme-dark-chart-5: #fb7185;
+  --theme-dark-hero-bg-start: #030d08;
+  --theme-dark-hero-bg-mid: #123723;
+  --theme-dark-hero-bg-end: #20543d;
+  --theme-dark-hero-fg: #f3fff7;
+  --theme-dark-hero-fg-muted: color-mix(in srgb, white 82%, transparent);
+  --theme-dark-hero-chip-bg: color-mix(in srgb, white 8%, transparent);
+  --theme-dark-hero-chip-border: color-mix(in srgb, white 16%, transparent);
+  --theme-dark-hero-button-border: color-mix(in srgb, white 18%, transparent);
+  --theme-dark-hero-button-hover-bg: color-mix(in srgb, white 10%, transparent);
+  --theme-dark-hero-button-hover-border: color-mix(in srgb, white 28%, transparent);
+}
 
-  --primary: #7c7cff;
-  --primary-foreground: #ffffff;
+[data-theme="coral"] {
+  --theme-light-background: #fbf7f8;
+  --theme-light-foreground: #2b1820;
+  --theme-light-card: rgba(255, 255, 255, 0.86);
+  --theme-light-card-foreground: #2b1820;
+  --theme-light-popover: rgba(255, 255, 255, 0.97);
+  --theme-light-popover-foreground: #2b1820;
+  --theme-light-primary: #d23e58;
+  --theme-light-primary-foreground: #ffffff;
+  --theme-light-secondary: #f9e5ea;
+  --theme-light-secondary-foreground: #7f1d35;
+  --theme-light-muted: #f4e9ec;
+  --theme-light-muted-foreground: #765763;
+  --theme-light-accent: #0f766e;
+  --theme-light-accent-foreground: #ffffff;
+  --theme-light-destructive: #b91c1c;
+  --theme-light-destructive-foreground: #ffffff;
+  --theme-light-border: #ead5db;
+  --theme-light-input: #ead5db;
+  --theme-light-ring: color-mix(in srgb, #d23e58 70%, white 30%);
+  --theme-light-chart-1: #d23e58;
+  --theme-light-chart-2: #0f766e;
+  --theme-light-chart-3: #b7791f;
+  --theme-light-chart-4: #6d5ac7;
+  --theme-light-chart-5: #0284c7;
+  --theme-light-hero-bg-start: #24101a;
+  --theme-light-hero-bg-mid: #6f2037;
+  --theme-light-hero-bg-end: #0f6263;
+  --theme-light-hero-fg: #fff5f7;
+  --theme-light-hero-fg-muted: color-mix(in srgb, white 84%, transparent);
+  --theme-light-hero-chip-bg: color-mix(in srgb, white 10%, transparent);
+  --theme-light-hero-chip-border: color-mix(in srgb, white 20%, transparent);
+  --theme-light-hero-button-border: color-mix(in srgb, white 18%, transparent);
+  --theme-light-hero-button-hover-bg: color-mix(in srgb, white 11%, transparent);
+  --theme-light-hero-button-hover-border: color-mix(in srgb, white 30%, transparent);
+  --theme-dark-background: #1a0b10;
+  --theme-dark-foreground: #fff0f3;
+  --theme-dark-card: rgba(48, 16, 27, 0.88);
+  --theme-dark-card-foreground: #fff0f3;
+  --theme-dark-popover: rgba(48, 16, 27, 0.97);
+  --theme-dark-popover-foreground: #fff0f3;
+  --theme-dark-primary: #fb7185;
+  --theme-dark-primary-foreground: #4c0519;
+  --theme-dark-secondary: #4b1828;
+  --theme-dark-secondary-foreground: #ffe4e6;
+  --theme-dark-muted: #35111e;
+  --theme-dark-muted-foreground: #d7a9b7;
+  --theme-dark-accent: #2dd4bf;
+  --theme-dark-accent-foreground: #042f2e;
+  --theme-dark-destructive: #f87171;
+  --theme-dark-destructive-foreground: #450a0a;
+  --theme-dark-border: #693249;
+  --theme-dark-input: #693249;
+  --theme-dark-ring: color-mix(in srgb, #fb7185 72%, white 28%);
+  --theme-dark-chart-1: #fb7185;
+  --theme-dark-chart-2: #2dd4bf;
+  --theme-dark-chart-3: #fbbf24;
+  --theme-dark-chart-4: #a78bfa;
+  --theme-dark-chart-5: #38bdf8;
+  --theme-dark-hero-bg-start: #12070b;
+  --theme-dark-hero-bg-mid: #4b1527;
+  --theme-dark-hero-bg-end: #0e5051;
+  --theme-dark-hero-fg: #fff5f7;
+  --theme-dark-hero-fg-muted: color-mix(in srgb, white 82%, transparent);
+  --theme-dark-hero-chip-bg: color-mix(in srgb, white 8%, transparent);
+  --theme-dark-hero-chip-border: color-mix(in srgb, white 16%, transparent);
+  --theme-dark-hero-button-border: color-mix(in srgb, white 18%, transparent);
+  --theme-dark-hero-button-hover-bg: color-mix(in srgb, white 10%, transparent);
+  --theme-dark-hero-button-hover-border: color-mix(in srgb, white 28%, transparent);
+}
 
-  --secondary: #172036;
-  --secondary-foreground: #dbe7ff;
+:root,
+[data-color-mode="light"],
+[data-color-mode="system"] {
+  color-scheme: light;
+  --background: var(--theme-light-background);
+  --foreground: var(--theme-light-foreground);
+  --card: var(--theme-light-card);
+  --card-foreground: var(--theme-light-card-foreground);
+  --popover: var(--theme-light-popover);
+  --popover-foreground: var(--theme-light-popover-foreground);
+  --primary: var(--theme-light-primary);
+  --primary-foreground: var(--theme-light-primary-foreground);
+  --secondary: var(--theme-light-secondary);
+  --secondary-foreground: var(--theme-light-secondary-foreground);
+  --muted: var(--theme-light-muted);
+  --muted-foreground: var(--theme-light-muted-foreground);
+  --accent: var(--theme-light-accent);
+  --accent-foreground: var(--theme-light-accent-foreground);
+  --destructive: var(--theme-light-destructive);
+  --destructive-foreground: var(--theme-light-destructive-foreground);
+  --border: var(--theme-light-border);
+  --input: var(--theme-light-input);
+  --ring: var(--theme-light-ring);
+  --chart-1: var(--theme-light-chart-1);
+  --chart-2: var(--theme-light-chart-2);
+  --chart-3: var(--theme-light-chart-3);
+  --chart-4: var(--theme-light-chart-4);
+  --chart-5: var(--theme-light-chart-5);
+  --hero-bg-start: var(--theme-light-hero-bg-start);
+  --hero-bg-mid: var(--theme-light-hero-bg-mid);
+  --hero-bg-end: var(--theme-light-hero-bg-end);
+  --hero-fg: var(--theme-light-hero-fg);
+  --hero-fg-muted: var(--theme-light-hero-fg-muted);
+  --hero-chip-bg: var(--theme-light-hero-chip-bg);
+  --hero-chip-border: var(--theme-light-hero-chip-border);
+  --hero-button-border: var(--theme-light-hero-button-border);
+  --hero-button-hover-bg: var(--theme-light-hero-button-hover-bg);
+  --hero-button-hover-border: var(--theme-light-hero-button-hover-border);
+}
 
-  --muted: #0f1a2d;
-  --muted-foreground: #97a6ba;
+.dark,
+[data-color-mode="dark"] {
+  color-scheme: dark;
+  --background: var(--theme-dark-background);
+  --foreground: var(--theme-dark-foreground);
+  --card: var(--theme-dark-card);
+  --card-foreground: var(--theme-dark-card-foreground);
+  --popover: var(--theme-dark-popover);
+  --popover-foreground: var(--theme-dark-popover-foreground);
+  --primary: var(--theme-dark-primary);
+  --primary-foreground: var(--theme-dark-primary-foreground);
+  --secondary: var(--theme-dark-secondary);
+  --secondary-foreground: var(--theme-dark-secondary-foreground);
+  --muted: var(--theme-dark-muted);
+  --muted-foreground: var(--theme-dark-muted-foreground);
+  --accent: var(--theme-dark-accent);
+  --accent-foreground: var(--theme-dark-accent-foreground);
+  --destructive: var(--theme-dark-destructive);
+  --destructive-foreground: var(--theme-dark-destructive-foreground);
+  --border: var(--theme-dark-border);
+  --input: var(--theme-dark-input);
+  --ring: var(--theme-dark-ring);
+  --chart-1: var(--theme-dark-chart-1);
+  --chart-2: var(--theme-dark-chart-2);
+  --chart-3: var(--theme-dark-chart-3);
+  --chart-4: var(--theme-dark-chart-4);
+  --chart-5: var(--theme-dark-chart-5);
+  --hero-bg-start: var(--theme-dark-hero-bg-start);
+  --hero-bg-mid: var(--theme-dark-hero-bg-mid);
+  --hero-bg-end: var(--theme-dark-hero-bg-end);
+  --hero-fg: var(--theme-dark-hero-fg);
+  --hero-fg-muted: var(--theme-dark-hero-fg-muted);
+  --hero-chip-bg: var(--theme-dark-hero-chip-bg);
+  --hero-chip-border: var(--theme-dark-hero-chip-border);
+  --hero-button-border: var(--theme-dark-hero-button-border);
+  --hero-button-hover-bg: var(--theme-dark-hero-button-hover-bg);
+  --hero-button-hover-border: var(--theme-dark-hero-button-hover-border);
+}
 
-  --accent: #22d3ee;
-  --accent-foreground: #062430;
-
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-
-  --border: #243247;
-  --input: #243247;
-  --ring: color-mix(in srgb, #7c7cff 70%, white 30%);
-
-  --chart-1: #7c7cff;
-  --chart-2: #22d3ee;
-  --chart-3: #2dd4bf;
-  --chart-4: #a78bfa;
-  --chart-5: #fb7185;
-
-  --hero-bg-start: #030712;
-  --hero-bg-mid: #111c37;
-  --hero-bg-end: #10325d;
-  --hero-fg: #f8fbff;
-  --hero-fg-muted: color-mix(in srgb, white 80%, transparent);
-  --hero-chip-bg: color-mix(in srgb, white 8%, transparent);
-  --hero-chip-border: color-mix(in srgb, white 14%, transparent);
-  --hero-button-border: color-mix(in srgb, white 16%, transparent);
-  --hero-button-hover-bg: color-mix(in srgb, white 10%, transparent);
-  --hero-button-hover-border: color-mix(in srgb, white 26%, transparent);
+@media (prefers-color-scheme: dark) {
+  [data-color-mode="system"] {
+    color-scheme: dark;
+    --background: var(--theme-dark-background);
+    --foreground: var(--theme-dark-foreground);
+    --card: var(--theme-dark-card);
+    --card-foreground: var(--theme-dark-card-foreground);
+    --popover: var(--theme-dark-popover);
+    --popover-foreground: var(--theme-dark-popover-foreground);
+    --primary: var(--theme-dark-primary);
+    --primary-foreground: var(--theme-dark-primary-foreground);
+    --secondary: var(--theme-dark-secondary);
+    --secondary-foreground: var(--theme-dark-secondary-foreground);
+    --muted: var(--theme-dark-muted);
+    --muted-foreground: var(--theme-dark-muted-foreground);
+    --accent: var(--theme-dark-accent);
+    --accent-foreground: var(--theme-dark-accent-foreground);
+    --destructive: var(--theme-dark-destructive);
+    --destructive-foreground: var(--theme-dark-destructive-foreground);
+    --border: var(--theme-dark-border);
+    --input: var(--theme-dark-input);
+    --ring: var(--theme-dark-ring);
+    --chart-1: var(--theme-dark-chart-1);
+    --chart-2: var(--theme-dark-chart-2);
+    --chart-3: var(--theme-dark-chart-3);
+    --chart-4: var(--theme-dark-chart-4);
+    --chart-5: var(--theme-dark-chart-5);
+    --hero-bg-start: var(--theme-dark-hero-bg-start);
+    --hero-bg-mid: var(--theme-dark-hero-bg-mid);
+    --hero-bg-end: var(--theme-dark-hero-bg-end);
+    --hero-fg: var(--theme-dark-hero-fg);
+    --hero-fg-muted: var(--theme-dark-hero-fg-muted);
+    --hero-chip-bg: var(--theme-dark-hero-chip-bg);
+    --hero-chip-border: var(--theme-dark-hero-chip-border);
+    --hero-button-border: var(--theme-dark-hero-button-border);
+    --hero-button-hover-bg: var(--theme-dark-hero-button-hover-bg);
+    --hero-button-hover-border: var(--theme-dark-hero-button-hover-border);
+  }
 }
 
 @theme inline {
@@ -189,25 +502,23 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background:
-      radial-gradient(
-        circle at top left,
-        color-mix(in srgb, white 88%, var(--blue) 12%),
-        transparent 28%
-      ),
-      linear-gradient(180deg, var(--background) 0%, color-mix(in srgb, var(--background) 94%, white 6%) 100%);
+    background: linear-gradient(
+      180deg,
+      var(--background) 0%,
+      color-mix(in srgb, var(--background) 96%, var(--primary) 4%) 100%
+    );
   }
 
   h1 {
-    @apply scroll-m-20 text-5xl font-semibold tracking-tight text-balance text-foreground;
+    @apply scroll-m-20 text-5xl font-semibold tracking-normal text-balance text-foreground;
   }
 
   h2 {
-    @apply scroll-m-20 text-3xl font-semibold tracking-tight text-foreground;
+    @apply scroll-m-20 text-3xl font-semibold tracking-normal text-foreground;
   }
 
   h3 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight text-foreground;
+    @apply scroll-m-20 text-xl font-semibold tracking-normal text-foreground;
   }
 
   p {
@@ -229,28 +540,12 @@
     width: 100%;
     overflow: hidden;
     color: var(--hero-fg);
-    background:
-      radial-gradient(
-        circle at 12% 18%,
-        color-mix(in srgb, var(--violet) 22%, transparent),
-        transparent 24%
-      ),
-      radial-gradient(
-        circle at 88% 14%,
-        color-mix(in srgb, var(--cyan) 18%, transparent),
-        transparent 24%
-      ),
-      radial-gradient(
-        circle at 78% 72%,
-        color-mix(in srgb, var(--teal) 16%, transparent),
-        transparent 26%
-      ),
-      linear-gradient(
-        135deg,
-        var(--hero-bg-start) 0%,
-        var(--hero-bg-mid) 56%,
-        var(--hero-bg-end) 100%
-      );
+    background: linear-gradient(
+      135deg,
+      var(--hero-bg-start) 0%,
+      var(--hero-bg-mid) 56%,
+      var(--hero-bg-end) 100%
+    );
     border-top: 1px solid color-mix(in srgb, white 14%, var(--border) 86%);
     border-bottom: 1px solid color-mix(in srgb, white 10%, var(--border) 90%);
     box-shadow:
@@ -265,21 +560,19 @@
   }
 
   .site-hero-glow-right {
-    background:
-      radial-gradient(
-        circle at top right,
-        color-mix(in srgb, var(--cyan) 18%, transparent),
-        transparent 28%
-      );
+    background: linear-gradient(
+      135deg,
+      transparent 56%,
+      color-mix(in srgb, var(--accent) 20%, transparent)
+    );
   }
 
   .site-hero-glow-left {
-    background:
-      radial-gradient(
-        circle at left,
-        color-mix(in srgb, var(--violet) 16%, transparent),
-        transparent 26%
-      );
+    background: linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--primary) 16%, transparent),
+      transparent 42%
+    );
   }
 
   .site-hero-chip {
@@ -331,32 +624,30 @@
   .site-hero-button-primary {
     background: linear-gradient(
       135deg,
-      color-mix(in srgb, white 8%, var(--indigo)),
-      color-mix(in srgb, white 6%, var(--blue)) 52%,
-      color-mix(in srgb, white 4%, var(--cyan))
+      color-mix(in srgb, white 8%, var(--primary)),
+      color-mix(in srgb, var(--primary) 72%, var(--accent) 28%)
     ) !important;
-    border: 1px solid color-mix(in srgb, white 16%, var(--blue)) !important;
-    color: white !important;
+    border: 1px solid color-mix(in srgb, white 18%, var(--primary)) !important;
+    color: var(--primary-foreground) !important;
     box-shadow:
-      0 14px 34px color-mix(in srgb, var(--blue) 34%, transparent),
+      0 14px 34px color-mix(in srgb, var(--primary) 32%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
   }
 
   .site-hero-button-primary:hover {
     background: linear-gradient(
       135deg,
-      color-mix(in srgb, white 10%, var(--violet)),
-      color-mix(in srgb, white 8%, var(--indigo)) 50%,
-      color-mix(in srgb, white 6%, var(--cyan))
+      color-mix(in srgb, white 12%, var(--primary)),
+      color-mix(in srgb, var(--primary) 62%, var(--accent) 38%)
     ) !important;
-    border-color: color-mix(in srgb, white 12%, var(--cyan)) !important;
-    color: white !important;
+    border-color: color-mix(in srgb, white 20%, var(--accent)) !important;
+    color: var(--primary-foreground) !important;
     transform: translateY(-1px);
   }
 
   .site-hero-button-primary:focus-visible {
-    color: white !important;
-    outline: 2px solid color-mix(in srgb, white 28%, var(--cyan) 72%);
+    color: var(--primary-foreground) !important;
+    outline: 2px solid color-mix(in srgb, white 28%, var(--accent) 72%);
     outline-offset: 3px;
   }
 
@@ -386,13 +677,13 @@
   .site-card-alt {
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, white 92%, var(--blue) 8%),
-      color-mix(in srgb, white 96%, var(--indigo) 4%)
+      color-mix(in srgb, var(--card) 92%, var(--primary) 8%),
+      color-mix(in srgb, var(--card) 96%, var(--accent) 4%)
     );
-    border: 1px solid color-mix(in srgb, white 16%, var(--border) 84%);
+    border: 1px solid color-mix(in srgb, var(--border) 86%, var(--primary) 14%);
     box-shadow:
-      0 1px 2px rgba(15, 23, 42, 0.04),
-      0 14px 36px rgba(59, 130, 246, 0.08);
+      0 1px 2px color-mix(in srgb, var(--foreground) 6%, transparent),
+      0 14px 36px color-mix(in srgb, var(--primary) 9%, transparent);
     backdrop-filter: blur(10px);
   }
 }
@@ -409,7 +700,7 @@
       90deg,
       color-mix(in srgb, black 34%, var(--hero-bg-start)) 0%,
       color-mix(in srgb, black 20%, var(--hero-bg-mid)) 36%,
-      color-mix(in srgb, transparent 20%, var(--cyan) 80%) 78%,
+      color-mix(in srgb, transparent 20%, var(--accent) 80%) 78%,
       transparent 100%
     );
 }

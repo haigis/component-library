@@ -1,9 +1,9 @@
-
-
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../lib/utils"
+import { Heading, type HeadingProps } from "./Heading"
+import { Text, type TextProps } from "./Text"
 
 export const cardVariants = cva(
     [
@@ -72,27 +72,38 @@ export function CardHeader({
     )
 }
 
+export type CardTitleProps = Omit<HeadingProps, "size">
+
 export function CardTitle({
+    as = "h3",
     className,
     ...props
-}: React.ComponentProps<"div">) {
+}: CardTitleProps) {
     return (
-        <div
+        <Heading
+            as={as}
+            size="card"
             data-slot="card-title"
-            className={cn("text-xl font-semibold tracking-tight text-foreground", className)}
+            className={className}
             {...props}
         />
     )
 }
 
+export type CardDescriptionProps = Omit<TextProps, "size" | "tone">
+
 export function CardDescription({
+    as = "div",
     className,
     ...props
-}: React.ComponentProps<"div">) {
+}: CardDescriptionProps) {
     return (
-        <div
+        <Text
+            as={as}
+            size="sm"
+            tone="muted"
             data-slot="card-description"
-            className={cn("col-start-1 text-sm text-muted-foreground", className)}
+            className={cn("col-start-1", className)}
             {...props}
         />
     )
@@ -136,4 +147,3 @@ export function CardFooter({
         />
     )
 }
-

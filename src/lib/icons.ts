@@ -109,7 +109,13 @@ export const iconRegistry = {
 
 export type IconName = keyof typeof iconRegistry
 
-export type IconComponent = React.ComponentType<{ className?: string }>
+export type IconComponent = React.ComponentType<{
+    className?: string
+    "aria-hidden"?: boolean | "true"
+    "aria-label"?: string
+    focusable?: "false"
+    role?: "img"
+}>
 
 /** Either a registry name (CMS-friendly) or a component (code-friendly). */
 export type IconProp = IconName | IconComponent

@@ -1,10 +1,12 @@
 import * as React from "react"
-import { ChevronRight } from "lucide-react"
 
 import { cn } from "../lib/utils"
-import { resolveIcon, type IconProp } from "../lib/icons"
+import type { IconProp } from "../lib/icons"
 import { Button } from "./Button"
 import { cardClass } from "./card"
+import { Heading } from "./Heading"
+import { Icon } from "./Icon"
+import { Text } from "./Text"
 
 export type SplitFeatureCardItem = {
     /** Registry name (e.g. "search") or an icon component. */
@@ -29,18 +31,16 @@ const itemClass =
     "group flex items-center gap-4 py-4 text-left first:pt-0 last:pb-0"
 
 function ItemContent({ icon, label, body }: Pick<SplitFeatureCardItem, "icon" | "label" | "body">) {
-    const Icon = resolveIcon(icon)
-
     return (
         <>
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-background text-primary">
-                <Icon className="h-5 w-5" />
+                <Icon icon={icon} size="md" />
             </div>
             <div className="flex-1">
-                <p className="text-sm font-semibold text-foreground">{label}</p>
-                <p className="mt-0.5 text-sm text-muted-foreground">{body}</p>
+                <Text size="sm" weight="semibold">{label}</Text>
+                <Text size="sm" tone="muted" className="mt-0.5">{body}</Text>
             </div>
-            <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+            <Icon icon="chevron-right" size="sm" className="shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
         </>
     )
 }
@@ -64,12 +64,12 @@ export function SplitFeatureCard({
             {linkHref ? (
                 <a href={linkHref} onClick={onLinkClick}>
                     {linkLabel}
-                    <ChevronRight className="h-4 w-4" />
+                    <Icon icon="chevron-right" size="sm" />
                 </a>
             ) : (
                 <>
                     {linkLabel}
-                    <ChevronRight className="h-4 w-4" />
+                    <Icon icon="chevron-right" size="sm" />
                 </>
             )}
         </Button>
@@ -79,11 +79,11 @@ export function SplitFeatureCard({
         <article className={cardClass({ className: cn("overflow-hidden p-0", className) })}>
             <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="flex flex-col justify-start gap-3 border-b border-border bg-gradient-to-br from-primary/10 via-accent/10 to-transparent p-8 lg:border-b-0 lg:border-r">
-                    <h3 className="text-3xl font-semibold tracking-tight text-foreground">
+                    <Heading as="h3" size="section">
                         {title}
-                    </h3>
+                    </Heading>
 
-                    <p className="max-w-xl text-muted-foreground">{description}</p>
+                    <Text tone="muted" className="max-w-xl">{description}</Text>
 
                     {linkButton}
                 </div>

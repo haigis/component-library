@@ -1,7 +1,7 @@
 import * as React from "react"
-import { ChevronRight } from "lucide-react"
 
 import { cn } from "../lib/utils"
+import { Icon } from "./Icon"
 
 export type BreadcrumbItem = {
     label: string
@@ -41,9 +41,10 @@ export function Breadcrumbs({ items, tone = "default", className }: BreadcrumbsP
                     return (
                         <li key={`${item.label}-${index}`} className="flex items-center gap-1.5">
                             {index > 0 ? (
-                                <ChevronRight
-                                    className="h-3.5 w-3.5 shrink-0 opacity-60"
-                                    aria-hidden="true"
+                                <Icon
+                                    icon="chevron-right"
+                                    size="sm"
+                                    className="shrink-0 opacity-60"
                                 />
                             ) : null}
 

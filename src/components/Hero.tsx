@@ -3,7 +3,9 @@ import * as React from "react"
 import { cn } from "../lib/utils"
 import { Button } from "./Button"
 import { Breadcrumbs, type BreadcrumbItem } from "./Breadcrumbs"
+import { Heading } from "./Heading"
 import { gridClass, laneClass, type LaneWidth } from "./layout"
+import { Text } from "./Text"
 
 export type HeroAction = {
     label: string
@@ -67,20 +69,33 @@ export function Hero({
                     )}
                 >
                     <div className={`${laneClass(width)} space-y-8`}>
-                        {chip ? <div className="site-hero-chip">{chip}</div> : null}
+                        {chip ? (
+                            <Text
+                                as="span"
+                                size="inherit"
+                                tone="inherit"
+                                weight="inherit"
+                                className="site-hero-chip"
+                            >
+                                {chip}
+                            </Text>
+                        ) : null}
 
                         <div className="space-y-5">
-                            <h1
+                            <Heading
+                                as="h1"
+                                size="display"
+                                tone="hero"
                                 id={titleId}
-                                className="site-hero-title max-w-4xl text-5xl font-semibold tracking-tight sm:text-6xl"
+                                className="max-w-4xl"
                             >
                                 {title}
-                            </h1>
+                            </Heading>
 
                             {body ? (
-                                <p className="site-hero-body max-w-3xl text-lg leading-8 sm:text-xl">
+                                <Text size="lead" tone="hero" className="max-w-3xl">
                                     {body}
-                                </p>
+                                </Text>
                             ) : null}
                         </div>
 

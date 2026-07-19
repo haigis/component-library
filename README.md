@@ -1,11 +1,12 @@
 # @haigis/component-library
 
-Mark's React component library, built with Tailwind CSS v4, [class-variance-authority](https://cva.style/), and Radix primitives. Bundled with [tsup](https://tsup.egoist.dev/) as ESM + CJS with TypeScript declarations. Ships its own `theme.css` (design tokens, light + dark, typography, hero styles).
+Mark's React component library, built with Tailwind CSS v4, [class-variance-authority](https://cva.style/), and Radix primitives. Bundled with [tsup](https://tsup.egoist.dev/) as ESM + CJS with TypeScript declarations. Ships its own `theme.css` (semantic design tokens, named colour themes, typography, and component styles).
 
 Designed so every component prop is **JSON-serializable** (URLs instead of callbacks, icon names instead of components) — ready to be driven by a CMS such as Payload, where authors or agents compose pages from blocks.
 
+**Foundations:** `ThemeProvider`, `Heading`, `Text`, `Icon`
 **Site components:** `SiteHeader`, `Hero`, `Breadcrumbs`, `SiteFooter`
-**Content components:** `Button`, `Card` family, `SplitFeatureCard`, `ImageCard`
+**Content components:** `Button`, `Card` family, `Banner`, `SplitFeatureCard`, `ImageCard`
 **Layout:** `PageLane`, `Section`, `SectionIntro`, `CardGrid`
 **Helpers:** `cn`, `iconRegistry`/`iconNames`/`resolveIcon`, variant functions, layout class constants
 
@@ -43,9 +44,63 @@ In your app's CSS entry (Tailwind v4 required):
 @source "../node_modules/@haigis/component-library/dist";
 ```
 
-- `theme.css` provides the design tokens (light + `.dark` variants), base typography, and the hero/card styles. Override any `--token` in your own `:root` to re-theme a project.
+- `theme.css` provides semantic tokens, four colour themes, light/dark/system modes, base typography, and component styles.
 - `@source` tells Tailwind to generate the utility classes the components use. Without it, components render unstyled.
-- Dark mode: add class `dark` to `<html>`.
+- The legacy `.dark` class remains supported.
+
+## Colour themes
+
+`ThemeProvider` applies the same inherited design tokens to a whole application, one page, or a nested section. Available themes are `indigo`, `ocean`, `forest`, and `coral`; modes are `light`, `dark`, and `system`.
+
+Apply a theme globally in the root layout:
+
+```tsx
+import { ThemeProvider } from "@haigis/component-library"
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <html lang="en">
+            <body>
+                <ThemeProvider
+                    theme="ocean"
+                    mode="system"
+                    className="min-h-screen"
+                >
+                    {children}
+                </ThemeProvider>
+            </body>
+        </html>
+    )
+}
+```
+
+Override it for a page by nesting another provider:
+
+```tsx
+export default function CampaignPage() {
+    return (
+        <ThemeProvider theme="coral" mode="dark" className="min-h-screen">
+            <CampaignContent />
+        </ThemeProvider>
+    )
+}
+```
+
+The nearest provider wins, so a light page can sit inside a dark application shell. For server-rendered document-level theming, the equivalent attributes are:
+
+```html
+<html data-theme="forest" data-color-mode="dark">
+```
+
+In Storybook, the palette and mode toolbars apply globally. A story can pin its page theme with `parameters.designTheme`:
+
+```tsx
+export const CampaignPage = {
+    parameters: {
+        designTheme: { theme: "coral", mode: "dark" },
+    },
+}
+```
 
 ## Full-page example
 
@@ -103,6 +158,39 @@ export default function HomePage() {
 ```
 
 ---
+
+## Typography
+
+`Heading` keeps semantic level separate from visual size:
+
+```tsx
+<Heading as="h1" size="display">Page title</Heading>
+<Heading as="h2" size="section">Section title</Heading>
+<Heading as="h3" size="card">Card title</Heading>
+```
+
+| Prop | Options | Default |
+| --- | --- | --- |
+| `as` | `h1` through `h6` | `h2` |
+| `size` | `display`, `page`, `section`, `card`, `subheading`, `inherit` | `section` |
+| `tone` | `default`, `hero`, `inherit` | `default` |
+
+`Text` provides reusable prose and label styling:
+
+```tsx
+<Text size="lead">Introductory copy.</Text>
+<Text size="sm" tone="muted">Supporting copy.</Text>
+<Text as="span" size="xs" weight="medium">Label</Text>
+```
+
+| Prop | Options | Default |
+| --- | --- | --- |
+| `as` | `p`, `span`, `div`, `small` | `p` |
+| `size` | `lead`, `body`, `sm`, `xs`, `inherit` | `body` |
+| `tone` | `default`, `muted`, `primary`, `hero`, `inherit` | `default` |
+| `weight` | `normal`, `medium`, `semibold`, `inherit` | `normal` |
+
+The site and content components use these primitives internally while preserving their existing heading hierarchy.
 
 ## Site components
 
@@ -203,6 +291,21 @@ Composable card. All slots are optional `<div>`s.
 
 Card props: `tone` (`"default" | "alt" | "muted" | "elevated"`, `alt` styled by `theme.css`), `size` (`"default" | "sm"`). `cardClass({ tone, size, className })` returns the class string for your own card-like elements.
 
+### Banner
+
+Horizontal or stacked callout with independent supporting icon, image media, and action placement. `iconPosition` controls only the icon relative to the text; `mediaPosition` controls only image or rich media.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `icon` | `IconProp` | |
+| `iconPosition` | `"top" \| "left" \| "right"` | `"top"` |
+| `media` | `ReactNode` | |
+| `mediaPosition` | `"top" \| "left" \| "right"` | `"left"` |
+| `actionPosition` | `"below" \| "left" \| "right"` | `"right"` |
+| `tone` | `"default" \| "alt" \| "muted" \| "elevated"` | `"default"` |
+
+Icons and images can be used independently or together. A top icon is placed above the title and aligned to the content edge; it never uses the image media slot.
+
 ### SplitFeatureCard
 
 Two-panel feature card: intro + optional link on the left, clickable icon rows on the right. Stacks below `lg`.
@@ -229,14 +332,16 @@ Two-panel feature card: intro + optional link on the left, clickable icon rows o
 
 ### ImageCard
 
-Media card: optional image area (any `ReactNode`), eyebrow, title, body, optional action. Also works image-less as a plain text card.
+Media card with an optional top image and an optional supporting icon in the content area. Images and icons may be used independently or together; image media stays above the content while `iconPosition` controls the icon relative to the text.
 
 | Prop | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `title` | `string` | yes | |
 | `body` | `ReactNode` | yes | String or rich content (multiple `<p>`, CMS rich text) |
+| `icon` | `IconProp` | no | Registry name or icon component |
+| `iconPosition` | `"top" \| "left" \| "right"` | no (`"top"`) | Top icons align with the title left edge |
 | `eyebrow` | `string` | no | |
-| `actionLabel` | `string` | no | Outline button |
+| `actionLabel` | `string` | no | Text action with arrow icon |
 | `actionHref` / `onAction` | | no | `<a>` when `actionHref` set |
 | `image` | `ReactNode` | no | |
 | `imageAspectRatio` | `string` | no (`"16 / 9"`) | |
@@ -247,7 +352,7 @@ Media card: optional image area (any `ReactNode`), eyebrow, title, body, optiona
 - **`PageLane`** — 12-col grid shell (max-width 1600px) with a centered lane: `width` is `8 | 10 | 12` (default `10`).
 - **`Section`** — page section: optional `SectionIntro` heading (`title`, `description`, `id`) + children with consistent spacing.
 - **`SectionIntro`** — standalone heading block (self-contained typography).
-- **`CardGrid`** — responsive card grid: `columns` is `2 | 3` (default `3`); 1 column on mobile.
+- **`CardGrid`** — responsive card grid: `columns` is `2 | 3 | 4` (default `3`); 1 column on mobile.
 - Raw class helpers: `shellClass`, `gridClass`, `laneClass(width)`.
 
 ## Icons
@@ -259,6 +364,8 @@ Media card: optional image area (any `ReactNode`), eyebrow, title, body, optiona
 - `resolveIcon(nameOrComponent)` — used internally by `SplitFeatureCard`
 
 Anywhere an `icon` prop exists you can pass either `"shield-check"` or a component.
+
+Icons are decorative by default. Pass `label` to `Icon` when a standalone icon conveys information that is not also present in text.
 
 ### cn
 
@@ -280,7 +387,9 @@ All props are strings/numbers/arrays — a page document is an array of blocks, 
 ```sh
 npm install
 npm run build   # one-off build to dist/
-npm run dev     # rebuild on change
+npm run dev             # rebuild the package on change
+npm run storybook       # component workshop at localhost:6006
+npm run build-storybook # static Storybook build
 ```
 
 Source in `src/`, output in `dist/` (gitignored — built on install via `prepare`). Build config in `tsup.config.ts`.

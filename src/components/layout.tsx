@@ -1,6 +1,8 @@
 import type { ReactNode } from "react"
 
 import { cn } from "../lib/utils"
+import { Heading } from "./Heading"
+import { Text } from "./Text"
 
 export type LaneWidth = 8 | 10 | 12
 
@@ -42,14 +44,13 @@ export function SectionIntro({
 }) {
     return (
         <div className="space-y-2">
-            <h2
-                id={id}
-                className="scroll-m-20 text-3xl font-semibold tracking-tight text-foreground"
-            >
+            <Heading as="h2" size="section" id={id}>
                 {title}
-            </h2>
+            </Heading>
             {description ? (
-                <p className="max-w-3xl leading-7 text-muted-foreground">{description}</p>
+                <Text tone="muted" className="max-w-3xl">
+                    {description}
+                </Text>
             ) : null}
         </div>
     )
@@ -74,20 +75,22 @@ export function Section({ title, description, id, children, className }: Section
 }
 
 export type CardGridProps = {
-    columns?: 2 | 3
+    columns?: 2 | 3 | 4
     children: ReactNode
     className?: string
+}
+
+const gridCols: Record<2 | 3 | 4, string> = {
+    2: "md:grid-cols-2",
+    3: "md:grid-cols-2 xl:grid-cols-3",
+    4: "md:grid-cols-2 xl:grid-cols-4",
 }
 
 /** Responsive grid for cards: 1 column on mobile, up to `columns` on wide screens. */
 export function CardGrid({ columns = 3, children, className }: CardGridProps) {
     return (
         <div
-            className={cn(
-                "grid gap-5",
-                columns === 2 ? "md:grid-cols-2" : "md:grid-cols-2 xl:grid-cols-3",
-                className
-            )}
+            className={cn("grid gap-5", gridCols[columns], className)}
         >
             {children}
         </div>
