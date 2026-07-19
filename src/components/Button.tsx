@@ -30,7 +30,7 @@ export const buttonVariants = cva(
                 destructive:
                     "bg-destructive text-destructive-foreground shadow-sm hover:opacity-90",
                 link:
-                    "text-primary underline-offset-4 hover:underline",
+                    "w-auto justify-start text-primary underline-offset-4 hover:underline",
                 heroPrimary: "site-hero-button-primary",
                 heroSecondary: "site-hero-button-secondary",
             },
