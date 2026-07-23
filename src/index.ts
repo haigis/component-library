@@ -76,6 +76,23 @@ export {
     type BannerAction,
     type BannerIconPosition,
 } from "./components/Banner"
+export {
+    AnnouncementBar,
+    type AnnouncementBarProps,
+    type AnnouncementBarItem,
+} from "./components/AnnouncementBar"
+export {
+    IconBar,
+    type IconBarProps,
+    type IconBarItem,
+    type IconBarLayout,
+} from "./components/IconBar"
+export {
+    ProductCard,
+    type ProductCardProps,
+    type ProductCardBadge,
+    type ProductBadgeVariant,
+} from "./components/ProductCard"
 export { cn } from "./lib/utils"
 export type { NavItem } from "./lib/nav"
 export {

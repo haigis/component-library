@@ -59,11 +59,11 @@ function IconSlot({ icon, className }: { icon: IconProp; className?: string }) {
     return (
         <div
             className={cn(
-                "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-background text-primary",
+                "flex h-10 w-10 shrink-0 items-center justify-center text-primary",
                 className
             )}
         >
-            <Icon icon={icon} size="md" />
+            <Icon icon={icon} size="lg" />
         </div>
     )
 }
@@ -152,16 +152,49 @@ export function Banner({
             >
                 {renderSideSlot("left")}
 
-                <div
-                    className={cn(
-                        "flex min-w-0 flex-1",
-                        icon && iconPosition !== "top" ? "items-start gap-4" : "flex-col"
-                    )}
-                >
-                    {icon && iconPosition === "left" ? <IconSlot icon={icon} /> : null}
-
+                {icon && iconPosition !== "top" ? (
                     <div className="min-w-0 flex-1">
-                        {icon && iconPosition === "top" ? (
+                        <div className="flex flex-col gap-4 sm:grid sm:grid-cols-[auto_1fr] sm:gap-4">
+                            {iconPosition === "left" ? (
+                                <div className="flex h-10 w-10 items-center justify-center text-primary sm:aspect-square sm:h-full sm:w-auto">
+                                    <Icon icon={icon} className="size-6 sm:h-3/5 sm:w-3/5" />
+                                </div>
+                            ) : null}
+
+                            <div className="min-w-0">
+                                <div className="space-y-2">
+                                    {eyebrow ? (
+                                        <Text size="sm" tone="primary" weight="medium">{eyebrow}</Text>
+                                    ) : null}
+                                    <Heading as={headingLevel} size="card">
+                                        {title}
+                                    </Heading>
+                                    {body ? (
+                                        <div className="space-y-3 text-sm text-muted-foreground [&_p]:text-inherit [&_p]:leading-6">
+                                            {typeof body === "string" ? (
+                                                <Text size="sm" tone="muted">{body}</Text>
+                                            ) : body}
+                                        </div>
+                                    ) : null}
+                                </div>
+
+                                {isBelowAction && action ? (
+                                    <div className="pt-5">
+                                        <ActionSlot action={action} />
+                                    </div>
+                                ) : null}
+                            </div>
+
+                            {iconPosition === "right" ? (
+                                <div className="flex h-10 w-10 items-center justify-center text-primary sm:aspect-square sm:h-full sm:w-auto">
+                                    <Icon icon={icon} className="size-6 sm:h-3/5 sm:w-3/5" />
+                                </div>
+                            ) : null}
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex min-w-0 flex-1 flex-col">
+                        {icon ? (
                             <IconSlot icon={icon} className="mb-4" />
                         ) : null}
 
@@ -187,9 +220,7 @@ export function Banner({
                             </div>
                         ) : null}
                     </div>
-
-                    {icon && iconPosition === "right" ? <IconSlot icon={icon} /> : null}
-                </div>
+                )}
 
                 {renderSideSlot("right")}
             </div>
