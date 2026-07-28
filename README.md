@@ -5,8 +5,9 @@ Mark's React component library, built with Tailwind CSS v4, [class-variance-auth
 Designed so every component prop is **JSON-serializable** (URLs instead of callbacks, icon names instead of components) — ready to be driven by a CMS such as Payload, where authors or agents compose pages from blocks.
 
 **Foundations:** `ThemeProvider`, `Heading`, `Text`, `Icon`
-**Site components:** `SiteHeader`, `Hero`, `Breadcrumbs`, `SiteFooter`
-**Content components:** `Button`, `Card` family, `Banner`, `SplitFeatureCard`, `ImageCard`
+**Site components:** `SiteHeader`, `Hero`, `Breadcrumbs`, `SiteFooter`, `AnnouncementBar`
+**Content components:** `Button`, `Card` family, `Banner`, `SplitFeatureCard`, `ImageCard`, `ProductCard`
+**Commerce / trust:** `IconBar`, `ProductCard`, `AnnouncementBar`
 **Layout:** `PageLane`, `Section`, `SectionIntro`, `CardGrid`
 **Helpers:** `cn`, `iconRegistry`/`iconNames`/`resolveIcon`, variant functions, layout class constants
 
@@ -359,13 +360,83 @@ Media card with an optional top image and an optional supporting icon in the con
 
 `lucide-react` icons addressable by name, so a CMS can store icon choices as strings:
 
-- `iconRegistry` — `{ "search": SearchIcon, … }` (~50 common icons)
+- `iconRegistry` — `{ "search": SearchIcon, … }` (~58 icons including battery, paintbrush, volume)
 - `iconNames` — all names, handy for CMS select-field options
 - `resolveIcon(nameOrComponent)` — used internally by `SplitFeatureCard`
 
 Anywhere an `icon` prop exists you can pass either `"shield-check"` or a component.
 
 Icons are decorative by default. Pass `label` to `Icon` when a standalone icon conveys information that is not also present in text.
+
+### AnnouncementBar
+
+Top-of-page bar for trust signals and promotional messages. Items overflow responsively — the first two show on mobile, the rest appear on `md+`.
+
+```tsx
+<AnnouncementBar
+    items={[
+        { icon: "star", text: "5-Star Rated", highlight: true },
+        { icon: "users", text: "Trusted by 10,000+ Customers" },
+        { icon: "send", text: "Free UK Shipping Over £75", highlight: true },
+    ]}
+/>
+```
+
+| Prop | Type | Notes |
+| --- | --- | --- |
+| `items` | `AnnouncementBarItem[]` | `{ icon?: IconProp, text: string, highlight?: boolean }` |
+| `className` | `string` | |
+
+`highlight` applies the `text-primary` accent to both the icon and text.
+
+### IconBar
+
+Trust / feature bar with icon + title + optional description. Supports centred (stacked) and inline (horizontal) layouts with configurable column counts.
+
+```tsx
+<IconBar
+    items={[
+        { icon: "shield-check", title: "12-Month Warranty", description: "All builds come with our workmanship warranty." },
+        { icon: "send", title: "Free UK Shipping", description: "On all orders over £75." },
+    ]}
+    layout="centered"
+    columns={5}
+/>
+```
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `items` | `IconBarItem[]` | required | `{ icon: IconProp, title: string, description?: string }` |
+| `layout` | `"centered" \| "inline"` | `"centered"` | Centered stacks icon above text; inline places icon beside text |
+| `columns` | `2 \| 3 \| 4 \| 5` | `5` | Responsive grid columns |
+| `className` | `string` | | |
+
+### ProductCard
+
+E-commerce product card with image slot, optional badge, price, and star rating. Wraps in an `<a>` when `href` is provided.
+
+```tsx
+<ProductCard
+    title="GBC — Crystal Purple IPS Premium Build"
+    price="£209.99"
+    badge={{ label: "New", variant: "default" }}
+    rating={5}
+    reviewCount={82}
+    image={<img src="/products/crystal-purple.jpg" alt="" />}
+    href="/products/gbc-crystal-purple"
+/>
+```
+
+| Prop | Type | Notes |
+| --- | --- | --- |
+| `title` | `string` | Product name (2-line clamp) |
+| `price` | `string` | Formatted price string |
+| `badge` | `{ label: string, variant?: "default" \| "success" \| "danger" }` | Top-left badge |
+| `rating` | `number` | Star rating (1–5) |
+| `reviewCount` | `number` | Shown in parentheses after stars |
+| `image` | `ReactNode` | Rendered in the square image area |
+| `href` | `string` | Wraps the whole card in an `<a>` |
+| `className` | `string` | |
 
 ### cn
 

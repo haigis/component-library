@@ -1,6 +1,7 @@
 import type * as React from "react"
 import {
     ArrowRight,
+    Battery,
     BookOpen,
     Calendar,
     Check,
@@ -33,6 +34,7 @@ import {
     Menu,
     MessageCircle,
     Package,
+    Paintbrush,
     Pencil,
     Phone,
     Play,
@@ -51,6 +53,7 @@ import {
     Trash2,
     User,
     Users,
+    Volume2,
     Wrench,
     X,
     Zap,
@@ -63,6 +66,7 @@ import {
 export const iconRegistry = {
     "alert-circle": CircleAlert,
     "arrow-right": ArrowRight,
+    battery: Battery,
     "book-open": BookOpen,
     calendar: Calendar,
     check: Check,
@@ -94,6 +98,7 @@ export const iconRegistry = {
     menu: Menu,
     "message-circle": MessageCircle,
     package: Package,
+    paintbrush: Paintbrush,
     pencil: Pencil,
     phone: Phone,
     play: Play,
@@ -112,6 +117,7 @@ export const iconRegistry = {
     "trending-up": TrendingUp,
     user: User,
     users: Users,
+    volume: Volume2,
     wrench: Wrench,
     x: X,
     zap: Zap,
