@@ -1,66 +1,67 @@
 {
-  "name": "@haigis/component-library",
-  "version": "2.5.0",
-  "description": "React component library built with Tailwind CSS, cva, and Radix primitives.",
-  "author": "Mark Haig",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/haigis/component-library.git"
-  },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+    "name": "@haigis/component-library",
+    "version": "2.5.0",
+    "description": "React component library built with Tailwind CSS, cva, and Radix primitives.",
+    "author": "Mark Haig",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/haigis/component-library.git"
     },
-    "./theme.css": "./theme.css"
-  },
-  "files": [
-    "dist",
-    "theme.css"
-  ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/haigis"
-  },
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "prepare": "npm run build",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
-  },
-  "dependencies": {
-    "@radix-ui/react-slot": "^1.2.4",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "^1.7.0",
-    "tailwind-merge": "^3.5.0"
-  },
-  "peerDependencies": {
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
-  },
-  "devDependencies": {
-    "@esbuild/win32-x64": "^0.28.1",
-    "@storybook/addon-a11y": "^10.5.2",
-    "@storybook/addon-docs": "^10.5.2",
-    "@storybook/react-vite": "^10.5.2",
-    "@tailwindcss/vite": "^4.3.3",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "storybook": "^10.5.2",
-    "tailwindcss": "^4.3.3",
-    "tsup": "^8.5.1",
-    "typescript": "^5.9.3",
-    "vite": "^8.1.5"
-  },
-  "overrides": {
-    "esbuild": "0.28.1"
-  }
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        },
+        "./theme.css": "./theme.css"
+    },
+    "files": [
+        "dist",
+        "theme.css"
+    ],
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/haigis"
+    },
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch",
+        "prepare": "npm run build",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build",
+        "contrast": "node scripts/contrast-audit.mjs --strict"
+    },
+    "dependencies": {
+        "@radix-ui/react-slot": "^1.2.4",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "lucide-react": "^1.7.0",
+        "tailwind-merge": "^3.5.0"
+    },
+    "peerDependencies": {
+        "react": "^18 || ^19",
+        "react-dom": "^18 || ^19"
+    },
+    "devDependencies": {
+        "@esbuild/win32-x64": "^0.28.1",
+        "@storybook/addon-a11y": "^10.5.2",
+        "@storybook/addon-docs": "^10.5.2",
+        "@storybook/react-vite": "^10.5.2",
+        "@tailwindcss/vite": "^4.3.3",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
+        "storybook": "^10.5.2",
+        "tailwindcss": "^4.3.3",
+        "tsup": "^8.5.1",
+        "typescript": "^5.9.3",
+        "vite": "^8.1.5"
+    },
+    "overrides": {
+        "esbuild": "0.28.1"
+    }
 }

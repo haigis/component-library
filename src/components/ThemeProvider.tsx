@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "../lib/utils"
 
-export const colorThemeNames = ["indigo", "ocean", "forest", "coral"] as const
+export const colorThemeNames = ["indigo", "ocean", "forest", "coral", "plum", "ember", "graphite", "rose"] as const
 
 export type ColorTheme = (typeof colorThemeNames)[number]
 export type ThemeMode = "light" | "dark" | "system"
